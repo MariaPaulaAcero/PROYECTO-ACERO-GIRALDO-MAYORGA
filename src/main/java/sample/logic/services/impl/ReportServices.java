@@ -2,7 +2,7 @@ package sample.logic.services.impl;
 
 
 import sample.logic.entities.Persona;
-import sample.logic.entities.ProfessionEnum;
+import sample.logic.entities.LeaderTypeEnum;
 import sample.logic.entities.Report;
 import sample.logic.services.IPersonaServices;
 
@@ -29,7 +29,7 @@ public class ReportServices {
 
         Map<String, Report> reports = new HashMap();
 
-        for (ProfessionEnum profession : ProfessionEnum.values()) {
+        for (LeaderTypeEnum profession : LeaderTypeEnum.values()) {
             reports.put(profession.toString(), new Report(profession.toString(), 0, String.format("Report of count of personas in profession %s", profession.toString())));
         }
 

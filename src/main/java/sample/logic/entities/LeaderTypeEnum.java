@@ -1,6 +1,6 @@
 package sample.logic.entities;
 
-public enum ProfessionEnum {
+public enum LeaderTypeEnum {
 
     CAMPESINO,
     AMBIENTALISTA,
