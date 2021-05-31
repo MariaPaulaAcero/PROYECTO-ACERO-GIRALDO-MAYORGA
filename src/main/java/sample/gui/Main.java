@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.PersonaException;
 import sample.logic.entities.Persona;
+import sample.logic.entities.ProfessionEnum;
 import sample.logic.services.impl.PersonaServices;
 
 import java.io.File;
@@ -30,12 +31,12 @@ public class Main extends Application {
     private TextField deathDateInput;
     private TextField municipalityInput;
     private TextField departmentInput;
-    //private TextField professionInput;
-    //private TextField isVictimInput;
+    private TextField professionInput;
+    private TextField isVictimInput;
 
     private Button addPersona;
     private Button deletePersona;
-    //private Button openReport;
+    private Button openReport;
 
     // Menu
     private MenuBar menuBar;
@@ -60,30 +61,30 @@ public class Main extends Application {
     private void behavior(Stage stage) {
         this.personaServices = new PersonaServices();
         try {
-            this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "07/01/2021", "Nechí", "Antoquia"));
-            this.personaServices.insert(new Persona("Alfredo", "García", "10/01/2021", "Ituango", "Antoquia"));
-            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "02/02/2021", "Corinto", "Cauca"));
-            this.personaServices.insert(new Persona("Albeiro", "Hoyos", "05/04/2021", "Anorí", "Antoquia"));
-            this.personaServices.insert(new Persona("Wilson", "Lopez", "28/04/2021", "Aguadas", "Caldas"));
-            this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "09/05/2021", "Aipe", "Huila"));
+            this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "07/01/2021", "Nechí", "Antoquia", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Alfredo", "García", "10/01/2021", "Ituango", "Antoquia", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "02/02/2021", "Corinto", "Cauca", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Albeiro", "Hoyos", "05/04/2021", "Anorí", "Antoquia", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Wilson", "Lopez", "28/04/2021", "Aguadas", "Caldas", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "09/05/2021", "Aipe", "Huila", ProfessionEnum.CAMPESINO,true));
 
-            this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "15/01/2021","Yondó","Antoquia"));
-            this.personaServices.insert(new Persona("Janeth", "Zapata", "21/01/2021","Dosquebradas","Risaralda"));
-            this.personaServices.insert(new Persona("José Miguel", "Barrientos Uribe", "28/01/2021","Yarumal","Antoquia"));
-            this.personaServices.insert(new Persona("Arcenio", "Quinayás Ruiz", "30/01/2021","San Agustín","Huila"));
-            this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "31/01/2021","Tarazá","Antoquia"));
-            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","02/02/2021","Corinto","Cauca"));
-            this.personaServices.insert(new Persona("Ovidio de Jesús", "Salazar","02/02/2021","Herveo","Tolima"));
-            this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","14/04/2021","La macarena","Meta"));
-            this.personaServices.insert(new Persona("Justiniano", "Torres García","19/04/2021","Bucaramanga","Santander"));
-            this.personaServices.insert(new Persona("Jorge Emilio", "Ramírez Venegas","09/05/2021","Aipe","Huila"));
+            this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "15/01/2021","Yondó","Antoquia",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Janeth", "Zapata", "21/01/2021","Dosquebradas","Risaralda",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("José Miguel", "Barrientos Uribe", "28/01/2021","Yarumal","Antoquia",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Arcenio", "Quinayás Ruiz", "30/01/2021","San Agustín","Huila",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "31/01/2021","Tarazá","Antoquia",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","02/02/2021","Corinto","Cauca",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Ovidio de Jesús", "Salazar","02/02/2021","Herveo","Tolima",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","14/04/2021","La macarena","Meta",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Justiniano", "Torres García","19/04/2021","Bucaramanga","Santander",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Jorge Emilio", "Ramírez Venegas","09/05/2021","Aipe","Huila",ProfessionEnum.COMUNAL,true));
 
-            this.personaServices.insert(new Persona("Gerardo", "León", "01/01/2021","Puerto Gaitán","Meta"));
-            this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "01/01/2021","El Yopal","Casanare"));
-            this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "29/03/2021","Florida","Valle del Cauca"));
-            this.personaServices.insert(new Persona("Beatríz", "Moreno Mosquera", "03/05/2021","Buenaventura","Valle"));
+            this.personaServices.insert(new Persona("Gerardo", "León", "01/01/2021","Puerto Gaitán","Meta", ProfessionEnum.SINDICAL,true));
+            this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "01/01/2021","El Yopal","Casanare",ProfessionEnum.SINDICAL,true));
+            this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "29/03/2021","Florida","Valle del Cauca",ProfessionEnum.SINDICAL,true));
+            this.personaServices.insert(new Persona("Beatríz", "Moreno Mosquera", "03/05/2021","Buenaventura","Valle",ProfessionEnum.SINDICAL,true));
 
-            this.personaServices.insert(new Persona("Andrés", "Moreno", "10/04/2021","Mosquera","Cauca"));
+            this.personaServices.insert(new Persona("Andrés", "Moreno", "10/04/2021","Mosquera","Cauca",ProfessionEnum.LGTBIQ,true));
 
         } catch (PersonaException e) {
             e.printStackTrace();
@@ -172,10 +173,8 @@ public class Main extends Application {
         deletePersona = new Button("Delete");
         deletePersona.setMinWidth(30);
 
-      /*  openReport = new Button("Open Report");
+        openReport = new Button("Open Report");
         openReport.setMinWidth(90);
-
-       */
     }
 
     private void setupInputs() {
