@@ -14,26 +14,29 @@ public class Persona extends Exportable implements Serializable {
     private String deathDate;
     private String municipality;
     private String department;
-    private Enum profession;
-    private boolean isVictim;
+    private String typesOfLeader;
+    private Enum typeOfLeader;
+    private boolean isSindicalVictim;
 
 
 
-    public Persona(String name, String lastName, String deathDate, String municipality, String department, Enum profession, boolean isVictim) throws PersonaException {
+    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader, Enum typeOfLeader, boolean isSindicalVictim) throws PersonaException {
         this.name = name;
         this.lastName = lastName;
         this.deathDate= deathDate;
         this.municipality = municipality;
         this.department = department;
-        this.profession = profession;
-        this.isVictim = isVictim;
+        this.typesOfLeader = typesOfLeader;
+        this.typeOfLeader = typeOfLeader;
+        this.isSindicalVictim = isSindicalVictim;
     }
-    public Persona(String name, String lastName, String deathDate, String municipality, String department ) throws PersonaException {
+    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader) throws PersonaException {
         this.name = name;
         this.lastName = lastName;
         this.deathDate= deathDate;
         this.municipality = municipality;
         this.department = department;
+        this.typesOfLeader = typesOfLeader;
     }
 
     public String getName() {
@@ -51,11 +54,11 @@ public class Persona extends Exportable implements Serializable {
     public String getDepartment() {
         return department;
     }
-    public Enum getProfession() {
-        return profession;
+    public String getTypesOfLeader() {
+        return typesOfLeader;
     }
     public boolean isVictim() {
-        return isVictim;
+        return isSindicalVictim;
     }
 
     /*public void setDeathDate(String deathDateInput) throws PersonaException {
@@ -83,11 +86,12 @@ public class Persona extends Exportable implements Serializable {
         result.add(this.deathDate);
         result.add(this.municipality);
         result.add(this.department);
+        result.add(this.typesOfLeader);
         return result;
     }
 
     @Override
     public String getHeader() {
-        return "name,LastName,deathDate, municipality,department";
+        return "name,LastName,deathDate, municipality,department, typesOfLeader";
     }
 }

@@ -34,7 +34,7 @@ public class ReportServices {
         }
 
         for (Persona p : personas) {
-            reports.get(p.getProfession().toString()).incrementCount();
+            reports.get(p.getTypesOfLeader().toString()).incrementCount();
         }
 
 

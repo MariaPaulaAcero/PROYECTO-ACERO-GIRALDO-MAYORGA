@@ -1,6 +1,5 @@
 package sample.gui;
 
-
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -31,6 +30,7 @@ public class Main extends Application {
     private TextField deathDateInput;
     private TextField municipalityInput;
     private TextField departmentInput;
+    private TextField typesOfLeaderInput;
     private TextField professionInput;
     private TextField isVictimInput;
 
@@ -61,30 +61,30 @@ public class Main extends Application {
     private void behavior(Stage stage) {
         this.personaServices = new PersonaServices();
         try {
-            this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "07/01/2021", "Nechí", "Antoquia", ProfessionEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Alfredo", "García", "10/01/2021", "Ituango", "Antoquia", ProfessionEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "02/02/2021", "Corinto", "Cauca", ProfessionEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Albeiro", "Hoyos", "05/04/2021", "Anorí", "Antoquia", ProfessionEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Wilson", "Lopez", "28/04/2021", "Aguadas", "Caldas", ProfessionEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "09/05/2021", "Aipe", "Huila", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "07/01/2021", "Nechí", "Antoquia","Campesino", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Alfredo", "García", "10/01/2021", "Ituango", "Antoquia","Campesino", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "02/02/2021", "Corinto", "Cauca","Campesino", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Albeiro", "Hoyos", "05/04/2021", "Anorí", "Antoquia","Campesino", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Wilson", "Lopez", "28/04/2021", "Aguadas", "Caldas","Campesino", ProfessionEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "09/05/2021", "Aipe", "Huila","Campesino", ProfessionEnum.CAMPESINO,true));
 
-            this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "15/01/2021","Yondó","Antoquia",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Janeth", "Zapata", "21/01/2021","Dosquebradas","Risaralda",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("José Miguel", "Barrientos Uribe", "28/01/2021","Yarumal","Antoquia",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Arcenio", "Quinayás Ruiz", "30/01/2021","San Agustín","Huila",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "31/01/2021","Tarazá","Antoquia",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","02/02/2021","Corinto","Cauca",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Ovidio de Jesús", "Salazar","02/02/2021","Herveo","Tolima",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","14/04/2021","La macarena","Meta",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Justiniano", "Torres García","19/04/2021","Bucaramanga","Santander",ProfessionEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Jorge Emilio", "Ramírez Venegas","09/05/2021","Aipe","Huila",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "15/01/2021","Yondó","Antoquia","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Janeth", "Zapata", "21/01/2021","Dosquebradas","Risaralda","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("José Miguel", "Barrientos Uribe", "28/01/2021","Yarumal","Antoquia","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Arcenio", "Quinayás Ruiz", "30/01/2021","San Agustín","Huila","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "31/01/2021","Tarazá","Antoquia","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","02/02/2021","Corinto","Cauca","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Ovidio de Jesús", "Salazar","02/02/2021","Herveo","Tolima","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","14/04/2021","La macarena","Meta","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Justiniano", "Torres García","19/04/2021","Bucaramanga","Santander","Comunal",ProfessionEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Jorge Emilio", "Ramírez Venegas","09/05/2021","Aipe","Huila","Comunal", ProfessionEnum.COMUNAL,true));
 
-            this.personaServices.insert(new Persona("Gerardo", "León", "01/01/2021","Puerto Gaitán","Meta", ProfessionEnum.SINDICAL,true));
-            this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "01/01/2021","El Yopal","Casanare",ProfessionEnum.SINDICAL,true));
-            this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "29/03/2021","Florida","Valle del Cauca",ProfessionEnum.SINDICAL,true));
-            this.personaServices.insert(new Persona("Beatríz", "Moreno Mosquera", "03/05/2021","Buenaventura","Valle",ProfessionEnum.SINDICAL,true));
+            this.personaServices.insert(new Persona("Gerardo", "León", "01/01/2021","Puerto Gaitán","Meta","Sindical",ProfessionEnum.SINDICAL,true));
+            this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "01/01/2021","El Yopal","Casanare","Sindical",ProfessionEnum.SINDICAL,true));
+            this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "29/03/2021","Florida","Valle del Cauca","Sindical",ProfessionEnum.SINDICAL,true));
+            this.personaServices.insert(new Persona("Beatríz", "Moreno Mosquera", "03/05/2021","Buenaventura","Valle","Sindical",ProfessionEnum.SINDICAL,true));
 
-            this.personaServices.insert(new Persona("Andrés", "Moreno", "10/04/2021","Mosquera","Cauca",ProfessionEnum.LGTBIQ,true));
+            this.personaServices.insert(new Persona("Andrés", "Moreno", "10/04/2021","Mosquera","Cauca","LGTBIQ",ProfessionEnum.LGTBIQ,true));
 
         } catch (PersonaException e) {
             e.printStackTrace();
@@ -93,13 +93,14 @@ public class Main extends Application {
 
         addPersona.setOnAction(e -> {
             try {
-                Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), deathDateInput.getText(), municipalityInput.getText(), departmentInput.getText());
+                Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), deathDateInput.getText(), municipalityInput.getText(), departmentInput.getText(),typesOfLeaderInput.getText());
                 this.personaServices.insert(p);
                 nameInput.clear();
                 lastNameInput.clear();
                 deathDateInput.clear();
                 municipalityInput.clear();
                 departmentInput.clear();
+                typesOfLeaderInput.clear();
             } catch (PersonaException personaException) {
                 personaException.printStackTrace();
             }
@@ -137,7 +138,6 @@ public class Main extends Application {
         });
     }
 
-
     private void setUp() {
         setupTable();
         setupInputs();
@@ -147,7 +147,7 @@ public class Main extends Application {
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(10, 10, 10, 10));
         hBox.setSpacing(10);
-        hBox.getChildren().addAll(nameInput, lastNameInput, deathDateInput, municipalityInput, departmentInput, addPersona, deletePersona);
+        hBox.getChildren().addAll(nameInput, lastNameInput, deathDateInput, municipalityInput, departmentInput, typesOfLeaderInput, addPersona, deletePersona);
 
         //Layout
         VBox layout = new VBox(10);
@@ -195,6 +195,10 @@ public class Main extends Application {
         departmentInput = new TextField();
         departmentInput.setPromptText("department");
         departmentInput.setMinWidth(30);
+
+        typesOfLeaderInput = new TextField();
+        typesOfLeaderInput.setPromptText("Type of Leader");
+        typesOfLeaderInput.setMinWidth(30);
     }
 
     private void setupTable() {
@@ -203,29 +207,34 @@ public class Main extends Application {
         nameColumn.setMaxWidth(200);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        //Name column
+        //LastName column
         TableColumn<Persona, String> lastNameColumn = new TableColumn<>("LastName");
         lastNameColumn.setMaxWidth(200);
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
 
-        //Name column
+        //Death Date column
         TableColumn<Persona, Integer> deathDateColumn = new TableColumn<>("Death Date");
         deathDateColumn.setMaxWidth(200);
         deathDateColumn.setCellValueFactory(new PropertyValueFactory<>("deathDate"));
 
-        //Name column
+        //Municipality column
         TableColumn<Persona, Integer> municipalityColumn = new TableColumn<>("Municipality");
         municipalityColumn.setMaxWidth(200);
         municipalityColumn.setCellValueFactory(new PropertyValueFactory<>("municipality"));
 
-        //Name column
+        //Department column
         TableColumn<Persona, Integer> departmentColumn = new TableColumn<>("Department");
         departmentColumn.setMaxWidth(200);
         departmentColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
 
+        //Department column
+        TableColumn<Persona, Integer> typesOfLeaderColumn = new TableColumn<>("Type of Leader");
+        typesOfLeaderColumn.setMaxWidth(200);
+        typesOfLeaderColumn.setCellValueFactory(new PropertyValueFactory<>("typesOfLeader"));
+
         //Table
         personasTable = new TableView<>();
-        personasTable.getColumns().addAll(nameColumn, lastNameColumn, deathDateColumn, municipalityColumn, departmentColumn);
+        personasTable.getColumns().addAll(nameColumn, lastNameColumn, deathDateColumn, municipalityColumn, departmentColumn ,typesOfLeaderColumn);
     }
 
     private void setupMenu() {
