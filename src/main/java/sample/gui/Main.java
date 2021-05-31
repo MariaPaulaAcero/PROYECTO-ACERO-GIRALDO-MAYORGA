@@ -132,11 +132,9 @@ public class Main extends Application {
             }
         });
 
-        /*openReport.setOnAction(e -> {
+        openReport.setOnAction(e -> {
             new ReportScene();
         });
-
-         */
     }
 
 
