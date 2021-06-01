@@ -2,9 +2,9 @@ package sample;
 
 public class PersonaException extends Exception {
 
-    public static String BAD_DEATHDATE_LOWER = "The age must be greater than 0";
-    public static String BAD_DEATHDATE_UPPER = "The age must be lower than 120";
-    public static String BAD_AGE = "this text is not an age";
+    public static String BAD_DEATHDATE_LOWER = "The death of date is lower than the date of birth";
+    public static String BAD_DEATHDATE_UPPER = "The death of date is greater than current date";
+    public static String BAD_DEATHDATE = "this text is not an death date";
 
     public PersonaException(String message) {
         super(message);

@@ -85,6 +85,29 @@ public class Main extends Application {
             this.personaServices.insert(new Persona("Beatriz", "Moreno Mosquera", "03/05/2021","Buenaventura","Valle","Sindical", LeaderTypeEnum.SINDICAL,true));
 
             this.personaServices.insert(new Persona("Andres", "Moreno", "10/04/2021","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true));
+            this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021/01/11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true));
+            this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021/05/15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021/02/14", "Cáceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Rafael", "Domico Carupia", "2021-04-06", "Dabeiba", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Alejandro", "Manugama Cheche", "2021/02/17", "Bágado", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Luz Aida", "Conchave Lana", "2021/02/19", "Alto Baudo", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Pedro Nel", "Valencia Evao", "2021/04/18", "Certegui", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Marcos", "Pai", "2021/02/21", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("John Albeiro", "Pai Pascal", "2021/02/24", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Carmen Ofelia", "Cumbalaza", "2021/03/03", "Cumbal", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Miguel", "Garcia Pai", "2021/03/16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Alvaro", "Pascal Garcia", "2021/03/16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Jose", "Santos Lopez", "2021/03/28", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Maria Ofelia", "Garcia", "2021/03/31", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Dionisio", "Pai Pascal", "2021/04/18", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Jaime", "Basilio", "2021/03/01", "San Basilio", "Sucre", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Maria Bernarda", " Juajibioy", "2021/03/17", "Orito", "Putumayo", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Gilberto", "Findicue Achicue", "2021/03/22", "Inza", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Ramiro", "Ascue Yule", "2021/03/28", "Toribio", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Fernando", "Lozada Franco", "2021/04/04", "Caloto", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Sandra Liliana", "Peña", "2021/04/20", "Caldono", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021/03/31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021/03/31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true));
 
         } catch (PersonaException e) {
             e.printStackTrace();
@@ -147,7 +170,7 @@ public class Main extends Application {
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(10, 10, 10, 10));
         hBox.setSpacing(10);
-        hBox.getChildren().addAll(nameInput, lastNameInput, deathDateInput, municipalityInput, departmentInput, typesOfLeaderInput, addPersona, deletePersona);
+        hBox.getChildren().addAll(nameInput, lastNameInput, deathDateInput, municipalityInput, departmentInput, typesOfLeaderInput, addPersona, deletePersona, openReport);
 
         //Layout
         VBox layout = new VBox(10);

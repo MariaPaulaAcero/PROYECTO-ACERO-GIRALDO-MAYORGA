@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id 'org.sonarqube' version '3.1.1'
+    id 'jacoco'
+
 }
 
 group 'org.example'
@@ -16,4 +19,17 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+sonarqube{
+    properties{
+        property 'sonar.host.url','https://app.codacy.com/organizations/gh/MariaPaulaAcero/dashboard'
+        property 'sonar.projectName','MARIA PAULA ACERO -PROYECTO'
+        property 'sonar.projectKey','sabana.poob.maria.acero:gradle-multimodule'
+        property 'sonar.sourceEncoding','UTF-8'
+
+    }
 }

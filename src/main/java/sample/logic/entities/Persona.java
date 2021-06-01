@@ -2,7 +2,9 @@ package sample.logic.entities;
 
 import sample.PersonaException;
 
+import javax.swing.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,12 +67,12 @@ public class Persona extends Exportable implements Serializable {
         try {
             String deathDate = JOptionPane.showInputDialog(deathDateInput);
 
-            if (deathDate > LocalDate.now()) throw new PersonaException(PersonaException.BAD_DETHDATE_LOWER);
-            if (deathDate > 120) throw new PersonaException(PersonaException.BAD_DETHDATE_UPPER);
+            if (this.deathDate > LocalDate.now()) throw new PersonaException(PersonaException.BAD_DEATHDATE_LOWER);
+            if (deathDate > 120) throw new PersonaException(PersonaException.BAD_DEATHDATE_UPPER);
 
             this.deathDate = deathDate;
         } catch (NumberFormatException er) {
-            throw new PersonaException(PersonaException.BAD_AGE + " : " + er.getMessage());
+            throw new PersonaException(PersonaException.BAD_DEATHDATE+ " : " + er.getMessage());
         }
 
     }
