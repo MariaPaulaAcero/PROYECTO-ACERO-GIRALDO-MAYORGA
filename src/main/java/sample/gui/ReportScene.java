@@ -2,6 +2,7 @@ package sample.gui;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -70,11 +71,12 @@ public class ReportScene {
         countColumn.setMaxWidth(200);
         countColumn.setCellValueFactory(new PropertyValueFactory("count"));
 
+       reportTable = new TableView<>();
+       reportTable.getColumns().addAll(professionNameColumn, countColumn);
+/*
         reportTable = new javafx.scene.control.TableView<>();
         reportTable.getColumns().addAll(professionNameColumn, countColumn);
 
-       // reportTable = new TableView<>();
-       // reportTable.getColumns().addAll(professionNameColumn, countColumn);
-
+ */
     }
 }

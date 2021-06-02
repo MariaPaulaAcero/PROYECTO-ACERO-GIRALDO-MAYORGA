@@ -2,8 +2,8 @@ sample/logic/entities/LeaderTypeEnum.java
  sample.logic.entities.LeaderTypeEnum
 sample/logic/entities/Exportable.java
  sample.logic.entities.Exportable
-sample/gui/ReportScene.java
- sample.gui.ReportScene
+sample/logic/services/impl/PersonaServices.java
+ sample.logic.services.impl.PersonaServices
 sample/logic/persistence/IExport.java
  sample.logic.persistence.IExport
 sample/logic/services/Controller.java
@@ -26,7 +26,8 @@ sample/PersonaException.java
  sample.PersonaException
 sample/logic/services/impl/ReportServices.java
  sample.logic.services.impl.ReportServices
-sample/logic/services/impl/PersonaServices.java
- sample.logic.services.impl.PersonaServices
+ sample.logic.services.impl.ReportServices$1
+sample/gui/ReportScene.java
+ sample.gui.ReportScene
 sample/gui/Main.java
  sample.gui.Main

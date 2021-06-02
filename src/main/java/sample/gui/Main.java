@@ -159,6 +159,7 @@ public class Main extends Application {
         openReport.setOnAction(e -> {
             new ReportScene();
         });
+
     }
 
     private void setUp() {
