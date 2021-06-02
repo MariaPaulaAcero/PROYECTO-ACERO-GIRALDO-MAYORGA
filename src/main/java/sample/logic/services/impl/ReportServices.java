@@ -113,7 +113,8 @@ public class ReportServices {
         }
 
         for (Persona p : personas) {
-            reports.get(p.getTypesOfLeader().toString()).incrementCount();
+            Objects.requireNonNull(reports.get(p.getTypesOfLeader().toString())).incrementCount();
+            //reports.get(p.getTypesOfLeader().toString()).incrementCount();
         }
 
 
@@ -124,7 +125,8 @@ public class ReportServices {
     public Report getCountOfVictims() {
 
         List<Persona> personas = personaServices.getAll();
-        int numOfVictims = (int) personas.stream().filter(p -> p.isVictim()).count();
+        int numOfVictims = (int) personas.stream().filter(Persona::isVictim).count();
+        //int numOfVictims = (int) personas.stream().filter(p -> p.isVictim()).count();
 
         return new Report("Victims", numOfVictims, "This is the number of victims during the strikes");
     }

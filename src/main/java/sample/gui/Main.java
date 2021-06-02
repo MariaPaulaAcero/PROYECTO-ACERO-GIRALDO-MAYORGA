@@ -42,6 +42,12 @@ public class Main extends Application {
     private MenuBar menuBar;
     private Map<String, MenuItem> fileMenuItems;
 
+    private MenuBar menuBar2;
+    private Map<String, MenuItem> fileMenuItems2;
+
+    private MenuBar menuBar3;
+    private Map<String, MenuItem> fileMenuItems3;
+
     // Logic Properties
     private PersonaServices personaServices;
 
@@ -149,7 +155,8 @@ public class Main extends Application {
             } else {
                 try {
                     this.personaServices.importPersonas(file);
-                    this.personaServices.getAll().stream().forEach(p -> System.out.println(p));
+                    this.personaServices.getAll().forEach(System.out::println);
+                    //this.personaServices.getAll().stream().forEach(p -> System.out.println(p));
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -158,6 +165,30 @@ public class Main extends Application {
 
         openReport.setOnAction(e -> {
             new ReportScene();
+        });
+        fileMenuItems.get("Campesino").setOnAction(e ->  {
+            Stage reportStage = new Stage();
+            //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
+            VBox reportLayout = new VBox(10);
+            Scene reportScene = new Scene(reportLayout,200,200);
+            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "07/01/2021", "Nechí", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
+                this.personaServices.insert(new Persona("Alfredo", "García", "10/01/2021", "Ituango", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
+                this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "02/02/2021", "Corinto", "Cauca","Campesino", LeaderTypeEnum.CAMPESINO,true));
+                this.personaServices.insert(new Persona("Albeiro", "Hoyos", "05/04/2021", "Anorí", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
+                this.personaServices.insert(new Persona("Wilson", "Lopez", "28/04/2021", "Aguadas", "Caldas","Campesino", LeaderTypeEnum.CAMPESINO,true));
+                this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "09/05/2021", "Aipe", "Huila","Campesino", LeaderTypeEnum.CAMPESINO,true));
+                personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            Label label = new Label("campesinos");
+            reportLayout.getChildren().add(label);
+            reportStage.setTitle("CAMPESINOS");
+            reportStage.setScene(reportScene);
+            reportStage.show();
         });
 
     }
@@ -180,12 +211,13 @@ public class Main extends Application {
 
         BorderPane layout2 = new BorderPane();
         layout2.setTop(menuBar);
+        //layout2.setLeft(menuBar2);
+        //layout2.setRight(menuBar3);
         layout2.setCenter(layout);
 
         //Scene
         //scene = new Scene(layout, 770, 300);
         scene = new Scene(layout2, 400, 400);
-
     }
 
     private void setUpCrud() {
@@ -263,17 +295,54 @@ public class Main extends Application {
 
     private void setupMenu() {
 
-        Menu fileMenu = new Menu("File");
+        //PRIMER MENU
 
+        Menu fileMenu = new Menu("File");
         fileMenuItems = new HashMap<>();
         fileMenuItems.put("Import", new MenuItem("Import"));
         fileMenuItems.put("Export", new MenuItem("Export"));
+        fileMenuItems.put("Campesino", new MenuItem("Campesino"));
+        fileMenuItems.put("Ambientalista", new MenuItem("Ambientalista"));
+        fileMenuItems.put("Afrodescendiente", new MenuItem("Afrodescendiente"));
+        fileMenuItems.put("Comunal", new MenuItem("Comunal"));
+        fileMenuItems.put("Indigena", new MenuItem("Indigena"));
+        fileMenuItems.put("LGTBIQ", new MenuItem("LGTBIQ"));
+        fileMenuItems.put("Sindical", new MenuItem("Sindical"));
+        fileMenuItems.put("Civico", new MenuItem("Civico"));
 
         fileMenu.getItems().add(fileMenuItems.get("Import"));
         fileMenu.getItems().add(fileMenuItems.get("Export"));
+        fileMenu.getItems().add(new SeparatorMenuItem());
+        fileMenu.getItems().add(fileMenuItems.get("Campesino"));
+        fileMenu.getItems().add(fileMenuItems.get("Ambientalista"));
+        fileMenu.getItems().add(fileMenuItems.get("Afrodescendiente"));
+        fileMenu.getItems().add(fileMenuItems.get("Comunal"));
+        fileMenu.getItems().add(fileMenuItems.get("Indigena"));
+        fileMenu.getItems().add(fileMenuItems.get("LGTBIQ"));
+        fileMenu.getItems().add(fileMenuItems.get("Sindical"));
+        fileMenu.getItems().add(fileMenuItems.get("Civico"));
 
         menuBar = new MenuBar();
         menuBar.getMenus().add(fileMenu);
+
+        // SEGUNDO MENU
+
+        Menu fileMenu2 = new Menu("Report");
+        fileMenuItems2 = new HashMap<>();
+        fileMenuItems2.put("Report", new MenuItem("Report"));
+        fileMenu2.getItems().add(fileMenuItems2.get("Report"));
+
+        menuBar2 = new MenuBar();
+        menuBar2.getMenus().add(fileMenu2);
+
+        //TERCER MENU
+        Menu fileMenu3 = new Menu("Full view");
+        fileMenuItems3 = new HashMap<>();
+        fileMenuItems3.put("Full view", new MenuItem("Full view"));
+        fileMenu3.getItems().add(fileMenuItems3.get("Full view"));
+
+        menuBar3 = new MenuBar();
+        menuBar3.getMenus().add(fileMenu3);
     }
 
     public static void main(String[] args) {

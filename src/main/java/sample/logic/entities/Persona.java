@@ -1,22 +1,19 @@
 package sample.logic.entities;
 
 import sample.PersonaException;
-
-import javax.swing.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Persona extends Exportable implements Serializable {
 
 
-    private String name;
-    private String lastName;
-    private String deathDate;
-    private String municipality;
-    private String department;
-    private String typesOfLeader;
+    private final String name;
+    private final String lastName;
+    private final String deathDate;
+    private final String municipality;
+    private final String department;
+    private final String typesOfLeader;
     private Enum typeOfLeader;
     private boolean isSindicalVictim;
 

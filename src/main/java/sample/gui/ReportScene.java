@@ -19,7 +19,7 @@ public class ReportScene {
     private Label label;
     private Scene scene;
     //ERROR private TableView reportTable;
-    private javafx.scene.control.TableView<Report> reportTable;
+    private TableView<Report> reportTable;
 
     // Logic properties
     private ReportServices reportServices;
