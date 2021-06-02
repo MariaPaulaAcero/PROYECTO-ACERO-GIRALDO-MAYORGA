@@ -1,7 +1,7 @@
 sample/logic/entities/Persona.java
  sample.logic.entities.Persona
-sample/gui/Main.java
- sample.gui.Main
+sample/logic/services/IPersonaServices.java
+ sample.logic.services.IPersonaServices
 sample/logic/persistence/IPersonaPersistence.java
  sample.logic.persistence.IPersonaPersistence
 sample/logic/persistence/IExport.java
@@ -29,5 +29,5 @@ sample/logic/entities/Exportable.java
  sample.logic.entities.Exportable
 sample/PersonaException.java
  sample.PersonaException
-sample/logic/services/IPersonaServices.java
- sample.logic.services.IPersonaServices
+sample/gui/Main.java
+ sample.gui.Main

@@ -91,7 +91,9 @@ public class Main extends Application {
             this.personaServices.insert(new Persona("Beatriz", "Moreno Mosquera", "03/05/2021","Buenaventura","Valle","Sindical", LeaderTypeEnum.SINDICAL,true));
 
             this.personaServices.insert(new Persona("Andres", "Moreno", "10/04/2021","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true));
+
             this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021/01/11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true));
+
             this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021/05/15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
             this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021/02/14", "Cáceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
             this.personaServices.insert(new Persona("Rafael", "Domico Carupia", "2021-04-06", "Dabeiba", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
@@ -166,6 +168,9 @@ public class Main extends Application {
         openReport.setOnAction(e -> {
             new ReportScene();
         });
+
+        //Menu campesino
+
         fileMenuItems.get("Campesino").setOnAction(e ->  {
             Stage reportStage = new Stage();
             //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
@@ -187,6 +192,148 @@ public class Main extends Application {
             Label label = new Label("campesinos");
             reportLayout.getChildren().add(label);
             reportStage.setTitle("CAMPESINOS");
+            reportStage.setScene(reportScene);
+            reportStage.show();
+        });
+
+        // Menu Ambientalista
+
+        fileMenuItems.get("Ambientalista").setOnAction(e ->  {
+            Stage reportStage = new Stage();
+            //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
+            VBox reportLayout = new VBox(10);
+            Scene reportScene = new Scene(reportLayout,200,200);
+
+            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021/01/11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true));
+                personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            Label label = new Label("Ambientalistas");
+            reportLayout.getChildren().add(label);
+            reportStage.setTitle("Ambientalistas");
+            reportStage.setScene(reportScene);
+            reportStage.show();
+        });
+
+        // Menu Comunal
+
+        fileMenuItems.get("Comunal").setOnAction(e ->  {
+            Stage reportStage = new Stage();
+            //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
+            VBox reportLayout = new VBox(10);
+            Scene reportScene = new Scene(reportLayout,200,200);
+
+            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "15/01/2021","Yondo","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Janeth", "Zapata", "21/01/2021","Dosquebradas","Risaralda","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Jose Miguel", "Barrientos Uribe", "28/01/2021","Yarumal","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Arcenio", "Quinayas Ruiz", "30/01/2021","San Agustin","Huila","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "31/01/2021","Taraza","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","02/02/2021","Corinto","Cauca","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Ovidio de Jesus", "Salazar","02/02/2021","Herveo","Tolima","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","14/04/2021","La macarena","Meta","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Justiniano", "Torres Garcia","19/04/2021","Bucaramanga","Santander","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Jorge Emilio", "Ramirez Venegas","09/05/2021","Aipe","Huila","Comunal", LeaderTypeEnum.COMUNAL,true));
+                personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            Label label = new Label("Comunal");
+            reportLayout.getChildren().add(label);
+            reportStage.setTitle("Comunal");
+            reportStage.setScene(reportScene);
+            reportStage.show();
+        });
+
+        // Menu Indigenas
+
+        fileMenuItems.get("Indigena").setOnAction(e ->  {
+            Stage reportStage = new Stage();
+            //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
+            VBox reportLayout = new VBox(10);
+            Scene reportScene = new Scene(reportLayout,200,200);
+            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021/05/15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021/02/14", "Cáceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Rafael", "Domico Carupia", "2021-04-06", "Dabeiba", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Alejandro", "Manugama Cheche", "2021/02/17", "Bágado", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Luz Aida", "Conchave Lana", "2021/02/19", "Alto Baudo", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Pedro Nel", "Valencia Evao", "2021/04/18", "Certegui", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Marcos", "Pai", "2021/02/21", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("John Albeiro", "Pai Pascal", "2021/02/24", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Carmen Ofelia", "Cumbalaza", "2021/03/03", "Cumbal", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Miguel", "Garcia Pai", "2021/03/16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Alvaro", "Pascal Garcia", "2021/03/16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Jose", "Santos Lopez", "2021/03/28", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Maria Ofelia", "Garcia", "2021/03/31", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Dionisio", "Pai Pascal", "2021/04/18", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Jaime", "Basilio", "2021/03/01", "San Basilio", "Sucre", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Maria Bernarda", " Juajibioy", "2021/03/17", "Orito", "Putumayo", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Gilberto", "Findicue Achicue", "2021/03/22", "Inza", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Ramiro", "Ascue Yule", "2021/03/28", "Toribio", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Fernando", "Lozada Franco", "2021/04/04", "Caloto", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Sandra Liliana", "Peña", "2021/04/20", "Caldono", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021/03/31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021/03/31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            Label label = new Label("Indígenas");
+            reportLayout.getChildren().add(label);
+            reportStage.setTitle("Indígenas");
+            reportStage.setScene(reportScene);
+            reportStage.show();
+        });
+
+
+        // Menu LGTBIQ
+        fileMenuItems.get("LGTBIQ").setOnAction(e ->  {
+            Stage reportStage = new Stage();
+            //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
+            VBox reportLayout = new VBox(10);
+            Scene reportScene = new Scene(reportLayout,200,200);
+
+            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices.insert(new Persona("Andres", "Moreno", "10/04/2021","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true));
+                personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            Label label = new Label("LGTBIQ");
+            reportLayout.getChildren().add(label);
+            reportStage.setTitle("LGTBIQ");
+            reportStage.setScene(reportScene);
+            reportStage.show();
+        });
+        // Menu Sindical
+        fileMenuItems.get("Sindical").setOnAction(e ->  {
+            Stage reportStage = new Stage();
+            //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
+            VBox reportLayout = new VBox(10);
+            Scene reportScene = new Scene(reportLayout,200,200);
+
+            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices.insert(new Persona("Gerardo", "Leon", "01/01/2021","Puerto Gaitan","Meta","Sindical", LeaderTypeEnum.SINDICAL,true));
+                this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "01/01/2021","El Yopal","Casanare","Sindical", LeaderTypeEnum.SINDICAL,true));
+                this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "29/03/2021","Florida","Valle del Cauca","Sindical", LeaderTypeEnum.SINDICAL,true));
+                this.personaServices.insert(new Persona("Beatriz", "Moreno Mosquera", "03/05/2021","Buenaventura","Valle","Sindical", LeaderTypeEnum.SINDICAL,true));
+
+                personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            Label label = new Label("Sindical");
+            reportLayout.getChildren().add(label);
+            reportStage.setTitle("Sindical");
             reportStage.setScene(reportScene);
             reportStage.show();
         });
