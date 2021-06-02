@@ -2,9 +2,17 @@ package sample.gui;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -16,13 +24,17 @@ import sample.logic.entities.Persona;
 import sample.logic.entities.LeaderTypeEnum;
 import sample.logic.services.impl.PersonaServices;
 
+import java.awt.*;
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main extends Application {
 
     // Visual Properties
+    private URI url;
     private Scene scene;
     private TableView<Persona> personasTable;
     private TextField nameInput;
@@ -170,6 +182,48 @@ public class Main extends Application {
         });
 
         //Menu campesino
+
+        fileMenuItems.get("¿Que son los lideres sociales?").setOnAction(e ->  {
+
+            Stage reportStage = new Stage();
+            //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
+            VBox reportLayout = new VBox(10);
+            Scene reportScene = new Scene(reportLayout,200,200);
+
+            Hyperlink hyperlink = new Hyperlink();
+            Scene hyp = new Scene(hyperlink,200,200);
+
+            try {
+                url = new URI("https://es.wikipedia.org/wiki/L%C3%ADder_social_(Colombia)");
+            } catch (URISyntaxException ex) {}
+
+            Label label = new Label("Estudios para el desarrollo y la Paz, Indepaz, asegura que “un líder o lideresa\n " +
+                    "social es aquella persona que defiende los derechos de la colectividad y desarrolla una acción por el bien\n" +
+                    " común reconocida en su comunidad, organización o territorio. Todo líder o lideresa social se considera un \n" +
+                    "defensor de Derechos Humanos.");
+
+            hyperlink.setText("https://es.wikipedia.org/wiki/L%C3%ADder_social_(Colombia)");
+            hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() :null;
+                    if ( desktop != null && desktop.isSupported(Desktop.Action.BROWSE) ) {
+                        try {
+                            desktop.browse(url);
+                        } catch ( Exception ex ) {
+                            System.err.println( ex.getMessage() );
+                        }
+                    }
+                }
+            });
+            reportStage.setScene(hyp);
+            reportLayout.getChildren().add(hyperlink);
+            reportStage.setTitle("¿Que son los lideres sociales?");
+            reportLayout.getChildren().add(label);
+            reportStage.setScene(reportScene);
+            reportStage.show();
+        });
+
 
         fileMenuItems.get("Campesino").setOnAction(e ->  {
             Stage reportStage = new Stage();
@@ -448,6 +502,7 @@ public class Main extends Application {
         fileMenuItems = new HashMap<>();
         fileMenuItems.put("Import", new MenuItem("Import"));
         fileMenuItems.put("Export", new MenuItem("Export"));
+        fileMenuItems.put("¿Que son los lideres sociales?", new MenuItem("¿Que son los lideres sociales?"));
         fileMenuItems.put("Campesino", new MenuItem("Campesino"));
         fileMenuItems.put("Ambientalista", new MenuItem("Ambientalista"));
         fileMenuItems.put("Afrodescendiente", new MenuItem("Afrodescendiente"));
@@ -459,6 +514,8 @@ public class Main extends Application {
 
         fileMenu.getItems().add(fileMenuItems.get("Import"));
         fileMenu.getItems().add(fileMenuItems.get("Export"));
+        fileMenu.getItems().add(new SeparatorMenuItem());
+        fileMenu.getItems().add(fileMenuItems.get("¿Que son los lideres sociales?"));
         fileMenu.getItems().add(new SeparatorMenuItem());
         fileMenu.getItems().add(fileMenuItems.get("Campesino"));
         fileMenu.getItems().add(fileMenuItems.get("Ambientalista"));
@@ -490,9 +547,10 @@ public class Main extends Application {
 
         menuBar3 = new MenuBar();
         menuBar3.getMenus().add(fileMenu3);
+
     }
 
-    public static void main(String[] args) {
+        public static void main(String[] args) {
         launch(args);
     }
 }

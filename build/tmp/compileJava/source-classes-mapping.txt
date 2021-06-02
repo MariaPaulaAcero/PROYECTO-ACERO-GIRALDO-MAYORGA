@@ -31,3 +31,4 @@ sample/PersonaException.java
  sample.PersonaException
 sample/gui/Main.java
  sample.gui.Main
+ sample.gui.Main$1
