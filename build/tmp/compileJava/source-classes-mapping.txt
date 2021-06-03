@@ -32,3 +32,9 @@ sample/PersonaException.java
 sample/gui/Main.java
  sample.gui.Main
  sample.gui.Main$1
+ sample.gui.Main$2
+ sample.gui.Main$3
+ sample.gui.Main$4
+ sample.gui.Main$5
+ sample.gui.Main$6
+ sample.gui.Main$7

@@ -14,9 +14,10 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.PersonaException;
@@ -24,6 +25,7 @@ import sample.logic.entities.Persona;
 import sample.logic.entities.LeaderTypeEnum;
 import sample.logic.services.impl.PersonaServices;
 
+import javax.swing.text.Element;
 import java.awt.*;
 import java.io.File;
 import java.net.URI;
@@ -194,15 +196,20 @@ public class Main extends Application {
             Scene hyp = new Scene(hyperlink,200,200);
 
             try {
-                url = new URI("https://es.wikipedia.org/wiki/L%C3%ADder_social_(Colombia)");
+                url = new URI("https://www.larepublica.co/especiales/lideres-sociales-en-colombia/se-habla-mucho-de-ellos-pero-que-es-y-que-hace-un-lider-social-3123581");
             } catch (URISyntaxException ex) {}
 
-            Label label = new Label("Estudios para el desarrollo y la Paz, Indepaz, asegura que “un líder o lideresa\n " +
-                    "social es aquella persona que defiende los derechos de la colectividad y desarrolla una acción por el bien\n" +
-                    " común reconocida en su comunidad, organización o territorio. Todo líder o lideresa social se considera un \n" +
-                    "defensor de Derechos Humanos.");
+            Label label = new Label("¿Que es un lider social en Colombia? \n" +
+                    "\n"+
+                    "Es una persona que dirige un partido politico, una poblacion o una comunidad,\n" +
+                    " en Colombia hay varios tipos de lideres sociales entre ellos estan: Campesinos, ambientalistas, afrodescendientes,\n" +
+                    " sindical, civico, comunal, indigena y LGTBIQ+.  \n"+
+                    "\n"+
+                    "¿Cual ha sido el porcentaje de muertes de líderes sociales en Colombia a lo largo del 2021? \n" +
+                    "\n"+
+                    "Campesino de 9%, Ambientalista de 2%, Afrodescendientes de 5%, Comunal de 16%, Indigena de 32%, LGTBIQ+ de 2%, Sindical de 6% y Civico de 28%. ");
 
-            hyperlink.setText("https://es.wikipedia.org/wiki/L%C3%ADder_social_(Colombia)");
+            hyperlink.setText("https://www.larepublica.co/especiales/lideres-sociales-en-colombia/se-habla-mucho-de-ellos-pero-que-es-y-que-hace-un-lider-social-3123581");
             hyperlink.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
@@ -216,6 +223,13 @@ public class Main extends Application {
                     }
                 }
             });
+            File file =new File("");
+            Image image = new Image(file.toURI().toString());
+            ImageView imageView = new ImageView(image);
+            BorderPane layout2 = new BorderPane();
+            layout2.getChildren().add(imageView);
+
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportStage.setTitle("¿Que son los lideres sociales?");
@@ -243,7 +257,35 @@ public class Main extends Application {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            Label label = new Label("campesinos");
+
+            Hyperlink hyperlink = new Hyperlink();
+            Scene hyp = new Scene(hyperlink,200,200);
+
+            Label label = new Label("Funcionalidad lider Campesino:\n" +
+                    "\n"+
+                    " Sustitucion de cultivos,conservacion ambiental y \n" +
+                    "reclamos por propiedad de terrenos.");
+            try {
+                url = new URI("https://n9.cl/ya9ma");
+            } catch (URISyntaxException ex) {}
+
+            hyperlink.setText("https://n9.cl/ya9ma");
+            hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent e) {
+                    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() :null;
+                    if ( desktop != null && desktop.isSupported(Desktop.Action.BROWSE) ) {
+                        try {
+                            desktop.browse(url);
+                        } catch ( Exception ex ) {
+                            System.err.println( ex.getMessage() );
+                        }
+                    }
+                }
+            });
+            reportStage.setScene(hyp);
+            reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
             reportStage.setTitle("CAMPESINOS");
             reportStage.setScene(reportScene);
@@ -265,7 +307,35 @@ public class Main extends Application {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            Label label = new Label("Ambientalistas");
+            Hyperlink hyperlink = new Hyperlink();
+            Scene hyp = new Scene(hyperlink,200,200);
+
+            Label label = new Label("Funcionalidad lider Ambientalista:\n" +
+                    "\n"+
+                    " Genera intercambio de roles, conocimiento, experiencias,\n" +
+                    "valores, con el fin de hacer a la comunidad reflexionar \n " +
+                    "sobre la transformacion de situaciones ambientales. \n" );
+            try {
+                url = new URI("https://n9.cl/q2x1u");
+            } catch (URISyntaxException ex) {}
+
+            hyperlink.setText("https://n9.cl/q2x1u ");
+            hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent e) {
+                    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() :null;
+                    if ( desktop != null && desktop.isSupported(Desktop.Action.BROWSE) ) {
+                        try {
+                            desktop.browse(url);
+                        } catch ( Exception ex ) {
+                            System.err.println( ex.getMessage() );
+                        }
+                    }
+                }
+            });
+            reportStage.setScene(hyp);
+            reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
             reportStage.setTitle("Ambientalistas");
             reportStage.setScene(reportScene);
@@ -296,7 +366,35 @@ public class Main extends Application {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            Label label = new Label("Comunal");
+
+            Hyperlink hyperlink = new Hyperlink();
+            Scene hyp = new Scene(hyperlink,200,200);
+
+            Label label = new Label("Funcionalidad lider Comunal:\n" +
+                    "\n"+
+                    " Defienden el territorio, los derechos humanos de la comunidad y\n " +
+                    "se enfocan en que haya una participacion en la politica por parte de las personas" );
+            try {
+                url = new URI("https://n9.cl/p9yzy");
+            } catch (URISyntaxException ex) {}
+
+            hyperlink.setText("https://n9.cl/p9yzy");
+            hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent e) {
+                    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() :null;
+                    if ( desktop != null && desktop.isSupported(Desktop.Action.BROWSE) ) {
+                        try {
+                            desktop.browse(url);
+                        } catch ( Exception ex ) {
+                            System.err.println( ex.getMessage() );
+                        }
+                    }
+                }
+            });
+            reportStage.setScene(hyp);
+            reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
             reportStage.setTitle("Comunal");
             reportStage.setScene(reportScene);
@@ -339,7 +437,36 @@ public class Main extends Application {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            Label label = new Label("Indígenas");
+
+            Hyperlink hyperlink = new Hyperlink();
+            Scene hyp = new Scene(hyperlink,200,200);
+
+            Label label = new Label("Funcionalidad lider Indigena:\n" +
+                    "\n"+
+                    " Seguridad campesina, protección del territorio,\n " +
+                    "mejoras de calidad en las vías de la comunidad, \n" +
+                    "mejoras en la salud y educacion.");
+            try {
+                url = new URI("https://n9.cl/a2tci");
+            } catch (URISyntaxException ex) {}
+
+            hyperlink.setText("https://n9.cl/a2tci");
+            hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent e) {
+                    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() :null;
+                    if ( desktop != null && desktop.isSupported(Desktop.Action.BROWSE) ) {
+                        try {
+                            desktop.browse(url);
+                        } catch ( Exception ex ) {
+                            System.err.println( ex.getMessage() );
+                        }
+                    }
+                }
+            });
+            reportStage.setScene(hyp);
+            reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
             reportStage.setTitle("Indígenas");
             reportStage.setScene(reportScene);
@@ -361,12 +488,43 @@ public class Main extends Application {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            Label label = new Label("LGTBIQ");
+
+            Hyperlink hyperlink = new Hyperlink();
+            Scene hyp = new Scene(hyperlink,200,200);
+
+            Label label = new Label("Funcionalidad lider LGTBIQ+:\n" +
+                    "\n"+
+                    " Se empeñan en que la igualdad de género cada vez sea mayor y \n" +
+                    " la discriminacion incremente, de igual forma defienden los derechos humanos.");
+
+            try {
+                url = new URI("http://www.scielo.org.co/pdf/luaz/n34/n34a13.pdf");
+            } catch (URISyntaxException ex) {}
+
+            hyperlink.setText("http://www.scielo.org.co/pdf/luaz/n34/n34a13.pdf");
+            hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent e) {
+                    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() :null;
+                    if ( desktop != null && desktop.isSupported(Desktop.Action.BROWSE) ) {
+                        try {
+                            desktop.browse(url);
+                        } catch ( Exception ex ) {
+                            System.err.println( ex.getMessage() );
+                        }
+                    }
+                }
+            });
+            reportStage.setScene(hyp);
+            reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
             reportStage.setTitle("LGTBIQ");
             reportStage.setScene(reportScene);
             reportStage.show();
         });
+
+
         // Menu Sindical
         fileMenuItems.get("Sindical").setOnAction(e ->  {
             Stage reportStage = new Stage();
@@ -385,7 +543,36 @@ public class Main extends Application {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-            Label label = new Label("Sindical");
+
+            Hyperlink hyperlink = new Hyperlink();
+            Scene hyp = new Scene(hyperlink,200,200);
+
+            Label label = new Label("Funcionalidad lider Sindical:\n" +
+                    "\n"+
+                    " Es un defensor de los derechos laborales de su comunidad,\n" +
+                    " se encargan de velar por una mejor en el ambito profesional y socioeconomico,\n" +
+                    " es un lider cercano al poder publico.  ");
+            try {
+                url = new URI("https://www.elespectador.com/judicial/continua-la-tragedia-gerardo-leon-primer-lider-social-asesinado-en-2021-article/ ");
+            } catch (URISyntaxException ex) {}
+
+            hyperlink.setText("https://www.elespectador.com/judicial/continua-la-tragedia-gerardo-leon-primer-lider-social-asesinado-en-2021-article/ ");
+            hyperlink.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent e) {
+                    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() :null;
+                    if ( desktop != null && desktop.isSupported(Desktop.Action.BROWSE) ) {
+                        try {
+                            desktop.browse(url);
+                        } catch ( Exception ex ) {
+                            System.err.println( ex.getMessage() );
+                        }
+                    }
+                }
+            });
+            reportStage.setScene(hyp);
+            reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
             reportStage.setTitle("Sindical");
             reportStage.setScene(reportScene);
@@ -412,9 +599,16 @@ public class Main extends Application {
 
         BorderPane layout2 = new BorderPane();
         layout2.setTop(menuBar);
-        //layout2.setLeft(menuBar2);
-        //layout2.setRight(menuBar3);
         layout2.setCenter(layout);
+
+
+        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTGREY,
+                CornerRadii.EMPTY, Insets.EMPTY);
+
+        // create Background
+        Background background = new Background(background_fill);
+        // set background
+        hBox.setBackground(background);
 
         //Scene
         //scene = new Scene(layout, 770, 300);
