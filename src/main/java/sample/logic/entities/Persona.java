@@ -2,18 +2,20 @@ package sample.logic.entities;
 
 import sample.PersonaException;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Persona extends Exportable implements Serializable {
 
 
-    private final String name;
-    private final String lastName;
-    private final String deathDate;
-    private final String municipality;
-    private final String department;
-    private final String typesOfLeader;
+    private String name;
+    private String lastName;
+    private String deathDate;
+    //private LocalDate deathDate;
+    private String municipality;
+    private String department;
+    private String typesOfLeader;
     private Enum typeOfLeader;
     private boolean isSindicalVictim;
 
@@ -23,6 +25,7 @@ public class Persona extends Exportable implements Serializable {
         this.name = name;
         this.lastName = lastName;
         this.deathDate= deathDate;
+        //this.setDeathDateToString(deathDate);
         this.municipality = municipality;
         this.department = department;
         this.typesOfLeader = typesOfLeader;
@@ -33,6 +36,7 @@ public class Persona extends Exportable implements Serializable {
         this.name = name;
         this.lastName = lastName;
         this.deathDate= deathDate;
+        //this.setDeathDateToString(deathDate);
         this.municipality = municipality;
         this.department = department;
         this.typesOfLeader = typesOfLeader;
@@ -60,29 +64,50 @@ public class Persona extends Exportable implements Serializable {
         return isSindicalVictim;
     }
 
-    /*public void setDeathDate(String deathDateInput) throws PersonaException {
-        try {
-            String deathDate = JOptionPane.showInputDialog(deathDateInput);
 
-            if (this.deathDate > LocalDate.now()) throw new PersonaException(PersonaException.BAD_DEATHDATE_LOWER);
-            if (deathDate > 120) throw new PersonaException(PersonaException.BAD_DEATHDATE_UPPER);
 
-            this.deathDate = deathDate;
-        } catch (NumberFormatException er) {
-            throw new PersonaException(PersonaException.BAD_DEATHDATE+ " : " + er.getMessage());
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    /*public void setDeathDateToString(String deathDateInput){
+        this.deathDate = LocalDate.parse(deathDateInput);
     }
 
      */
+    public void setDeathDate(String deathDate){
+        this.deathDate=deathDate;
+    }
 
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setTypesOfLeader(String typesOfLeader) {
+        this.typesOfLeader = typesOfLeader;
+    }
+
+    //public boolean isVictim(){return isVictim;}
+
+    @Override
+    public String toString(){
+
+        return String.format("Nombre=%s, Apellido=%s, Fecha de Fallecimiento=%s, Municipio=%s, Departamento=%s, Tipo de Lider=%s", this.name, this.lastName, this.deathDate, this.municipality, this.department, this.typesOfLeader);
+    }
 
     @Override
     public List<String> toListString() {
         List<String> result = new ArrayList<>();
         result.add(this.name);
         result.add(this.lastName);
-        result.add(this.deathDate);
+        //result.add(this.deathDate);
         result.add(this.municipality);
         result.add(this.department);
         result.add(this.typesOfLeader);

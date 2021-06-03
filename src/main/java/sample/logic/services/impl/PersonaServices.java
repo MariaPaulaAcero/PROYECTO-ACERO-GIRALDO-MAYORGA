@@ -56,6 +56,20 @@ public class PersonaServices implements IPersonaServices {
     }
 
     @Override
+    public Persona update(Persona persona, Persona persona2) {
+        if (!this.personas.contains(persona2)){
+
+            persona.setName(persona2.getName());
+            persona.setLastName(persona2.getLastName());
+            persona.setDeathDate(persona2.getDeathDate());
+            persona.setMunicipality(persona2.getMunicipality());
+            persona.setDepartment(persona2.getDepartment());
+            persona.setTypesOfLeader(persona2.getTypesOfLeader());
+
+        }
+        return persona;
+    }
+    @Override
     public List<Persona> importPersonas(File file) throws Exception {
         return null;
     }

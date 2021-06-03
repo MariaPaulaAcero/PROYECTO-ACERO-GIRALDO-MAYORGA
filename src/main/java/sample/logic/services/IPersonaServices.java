@@ -12,6 +12,8 @@ public interface IPersonaServices {
 
     void delete(List<Persona> personas);
 
+    Persona update(Persona persona, Persona persona2);
+
     void export() throws Exception;
 
     List<Persona> importPersonas(File file) throws Exception;
