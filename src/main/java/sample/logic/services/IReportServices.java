@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface IReportServices {
-    Map<String, Report> getReportPersonasByProfession();
-    Map<String, Report> getReportPersonasByProfession(List<Persona> personas);
+    List<Report> getReportPersonasByProfession();
+    List<Report> getReportPersonasByProfession(List<Persona> personas);
 
     Report getCountOfVictims();
 

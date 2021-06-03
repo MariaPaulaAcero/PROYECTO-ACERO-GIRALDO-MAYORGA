@@ -2,6 +2,7 @@ package sample.gui;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
@@ -48,10 +49,7 @@ public class ReportScene {
     private void behavior(Stage stage) {
 
         this.reportServices = new ReportServices();
-        Map<String, Report> reportPersonasByProfession = this.reportServices.getReportPersonasByProfession();
-        Report victims = this.reportServices.getCountOfVictims();
-
-        reportTable.setItems((ObservableList<Report>) reportPersonasByProfession.values());
+        reportTable.setItems((ObservableList<Report>) reportServices.getReportPersonasByProfession());
 
         //reportTable.setItems((List<Report>) reportPersonasByProfession.values());//getValues
 
@@ -61,13 +59,13 @@ public class ReportScene {
 
         // Profession Name
         //TableColumn<Report,String> professionNameColumn = new TableColumn<>();
-        javafx.scene.control.TableColumn<Report, String> professionNameColumn = new javafx.scene.control.TableColumn<Report, String>();
+        TableColumn<Report, String> professionNameColumn = new TableColumn<Report, String>();
         professionNameColumn.setMaxWidth(200);
         professionNameColumn.setCellValueFactory(new PropertyValueFactory("criteria"));
 
         // Count
         //TableColumn<Report, Integer> countColumn = new TableColumn<>();
-        javafx.scene.control.TableColumn<Report, Integer> countColumn = new javafx.scene.control.TableColumn<Report, Integer>();
+        TableColumn<Report, Integer> countColumn = new TableColumn<Report, Integer>();
         countColumn.setMaxWidth(200);
         countColumn.setCellValueFactory(new PropertyValueFactory("count"));
 

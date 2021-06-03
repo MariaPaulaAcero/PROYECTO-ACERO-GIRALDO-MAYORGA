@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Report extends Exportable implements Serializable {
     private String criteria;
-    private int count;
+    private int count=0;
     private String description;
 
     public Report(){

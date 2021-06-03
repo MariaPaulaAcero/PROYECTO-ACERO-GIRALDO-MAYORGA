@@ -65,7 +65,7 @@ public class Main extends Application {
     private Map<String, MenuItem> fileMenuItems3;
 
     // Logic Properties
-    private PersonaServices personaServices;
+    public static PersonaServices personaServices;
 
 
     //CRUD -
