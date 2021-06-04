@@ -10,7 +10,8 @@ public class Report extends Exportable implements Serializable {
     private String description;
 
     public Report(){
-
+    }
+    public Report(String criteria){
     }
 
     public Report(String criteria, int count, String description) {
@@ -31,8 +32,9 @@ public class Report extends Exportable implements Serializable {
         return description;
     }
 
-    public void incrementCount(){
+    public int incrementCount(){
         this.count += 1;
+        return count;
     }
 
     @Override

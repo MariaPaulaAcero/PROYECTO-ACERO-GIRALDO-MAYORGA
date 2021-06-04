@@ -16,12 +16,15 @@ public class Persona extends Exportable implements Serializable {
     private String municipality;
     private String department;
     private String typesOfLeader;
+
+
     private Enum typeOfLeader;
-    private boolean isSindicalVictim;
+    private boolean isVictim;
+    private boolean isCampesinoVictim;
 
 
 
-    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader, Enum typeOfLeader, boolean isSindicalVictim) throws PersonaException {
+    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader, Enum typeOfLeader, boolean isVictim) throws PersonaException {
         this.name = name;
         this.lastName = lastName;
         this.deathDate= deathDate;
@@ -30,7 +33,8 @@ public class Persona extends Exportable implements Serializable {
         this.department = department;
         this.typesOfLeader = typesOfLeader;
         this.typeOfLeader = typeOfLeader;
-        this.isSindicalVictim = isSindicalVictim;
+        this.isVictim = isVictim;
+
     }
     public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader) throws PersonaException {
         this.name = name;
@@ -60,9 +64,14 @@ public class Persona extends Exportable implements Serializable {
     public String getTypesOfLeader() {
         return typesOfLeader;
     }
+
     public boolean isVictim() {
-        return isSindicalVictim;
+        return isVictim;
     }
+    public Enum getTypeOfLeader() {
+        return typeOfLeader;
+    }
+
 
 
 
@@ -93,6 +102,13 @@ public class Persona extends Exportable implements Serializable {
     public void setTypesOfLeader(String typesOfLeader) {
         this.typesOfLeader = typesOfLeader;
     }
+    public void setTypeOfLeader(Enum typeOfLeader) {
+        this.typeOfLeader = typeOfLeader;
+    }
+    public void setIsVictim(boolean isVictim) {
+        isVictim = isVictim;
+    }
+
 
     //public boolean isVictim(){return isVictim;}
 
@@ -104,10 +120,35 @@ public class Persona extends Exportable implements Serializable {
 
     @Override
     public List<String> toListString() {
+        String  vistima = "NO";
+        String  leaderType = String.valueOf(LeaderTypeEnum.CAMPESINO);
+        String  leaderType1 = String.valueOf(LeaderTypeEnum.AMBIENTALISTA);
+        String  leaderType2 = String.valueOf(LeaderTypeEnum.AFRODESCENDIENTES);
+
+        if (isVictim)
+            vistima= "SI";
+        if (leaderType.equals(LeaderTypeEnum.CAMPESINO))
+            leaderType = "Violencia hacia Campesinos";
+        if (leaderType1.equals(LeaderTypeEnum.AMBIENTALISTA))
+            leaderType1= "Violencia hacia Ambientalistas";
+        if (leaderType2.equals(LeaderTypeEnum.AFRODESCENDIENTES))
+            leaderType2= "Violencia hacia Afrodescendientes";
+        if (leaderType.equals(LeaderTypeEnum.SINDICAL))
+            leaderType= "Violencia hacia Sindicales";
+        if (leaderType.equals(LeaderTypeEnum.CIVICO))
+            leaderType= "Violencia hacia Civicos";
+        if (leaderType.equals(LeaderTypeEnum.COMUNAL))
+            leaderType= "Violencia hacia comunales";
+        if (leaderType.equals(LeaderTypeEnum.INDIGENA))
+            leaderType= "Violencia hacia indigenas";
+        if (leaderType.equals(LeaderTypeEnum.LGTBIQ))
+            leaderType= "Violencia hacia LGTBIQ+";
+
+        
         List<String> result = new ArrayList<>();
         result.add(this.name);
         result.add(this.lastName);
-        //result.add(this.deathDate);
+        result.add(this.deathDate);
         result.add(this.municipality);
         result.add(this.department);
         result.add(this.typesOfLeader);

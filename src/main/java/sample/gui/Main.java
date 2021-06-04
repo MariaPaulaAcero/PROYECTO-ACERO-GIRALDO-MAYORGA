@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.PersonaException;
@@ -29,6 +31,7 @@ import sample.logic.services.impl.PersonaServices;
 import javax.swing.text.Element;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -68,6 +71,7 @@ public class Main extends Application {
     public static PersonaServices personaServices;
 
 
+
     //CRUD -
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -80,7 +84,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    private void behavior(Stage stage) {
+    private void behavior(Stage stage) throws IOException, ClassNotFoundException {
         this.personaServices = new PersonaServices();
         try {
             this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "2021-01-07", "Nechi", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
@@ -164,6 +168,40 @@ public class Main extends Application {
         personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
 
         addPersona.setOnAction(e -> {
+            boolean victim = false;
+            Enum leaderTypeEnum = LeaderTypeEnum.NO_APLICA;
+
+            if (leaderTypeEnum.equals(LeaderTypeEnum.CAMPESINO))
+                victim = true;
+            if (leaderTypeEnum.equals(LeaderTypeEnum.AMBIENTALISTA))
+                victim = true;
+            if (leaderTypeEnum.equals(LeaderTypeEnum.AFRODESCENDIENTES))
+                victim = true;
+            if (leaderTypeEnum.equals(LeaderTypeEnum.SINDICAL))
+                victim = true;
+            if (leaderTypeEnum.equals(LeaderTypeEnum.CIVICO))
+                victim = true;
+            if (leaderTypeEnum.equals(LeaderTypeEnum.COMUNAL))
+                victim = true;
+            if (leaderTypeEnum.equals(LeaderTypeEnum.INDIGENA))
+                victim = true;
+            if (leaderTypeEnum.equals(LeaderTypeEnum.LGTBIQ))
+                victim = true;
+
+           /* this.personaServices = new PersonaServices();
+
+            leaderVictimsToralNumber.setText(String.valueOf(personaServices.getVictims().size()));
+            leaderVictimsCampesinoNumber.setText(String.valueOf(personaServices.getCampesino().size()));
+            leaderVictimsAmbientalistaNumber.setText(String.valueOf(personaServices.getAmbientalista().size()));
+            leaderVictimsAfrodescendientesNumber.setText(String.valueOf(personaServices.getAfrodescendiente().size()));
+            leaderVictimsSindicalNumber.setText(String.valueOf(personaServices.getSindical().size()));
+            leaderVictimsCivicoNumber.setText(String.valueOf(personaServices.getCivico().size()));
+            leaderVictimsComunalNumber.setText(String.valueOf(personaServices.getComunal().size()));
+            leaderVictimsIndigenaNumber.setText(String.valueOf(personaServices.getIndigena().size()));
+            leaderVictimsLGTBIQNumber.setText(String.valueOf(personaServices.getLgtbiq().size()));
+
+            */
+
             try {
                 Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), deathDateInput.getText(), municipalityInput.getText(), departmentInput.getText(),typesOfLeaderInput.getText());
                 this.personaServices.insert(p);
@@ -264,12 +302,17 @@ public class Main extends Application {
             Label label = new Label("¿Que es un lider social en Colombia? \n" +
                     "\n"+
                     "Es una persona que dirige un partido politico, una poblacion o una comunidad,\n" +
-                    " en Colombia hay varios tipos de lideres sociales entre ellos estan: Campesinos, ambientalistas, afrodescendientes,\n" +
+                    " en Colombia hay varios tipos de lideres sociales entre ellos estan: Campesinos,\n" +
+                    " ambientalistas, afrodescendientes,\n" +
                     " sindical, civico, comunal, indigena y LGTBIQ+.  \n"+
                     "\n"+
-                    "¿Cual ha sido el porcentaje de muertes de líderes sociales en Colombia a lo largo del 2021? \n" +
+                    "¿Cual ha sido el porcentaje de muertes de líderes sociales en\n" +
+                    " Colombia a lo largo del 2021? \n" +
                     "\n"+
-                    "Campesino de 9%, Ambientalista de 2%, Afrodescendientes de 5%, Comunal de 16%, Indigena de 32%, LGTBIQ+ de 2%, Sindical de 6% y Civico de 28%. ");
+                    "Campesino de 9%, Ambientalista de 2%, Afrodescendientes de 5%,\n" +
+                    " Comunal de 16%, Indigena de 32%,\n" +
+                    " LGTBIQ+\n" +
+                    " de 2%, Sindical de 6% y Civico de 28%. ");
 
             hyperlink.setText("https://www.larepublica.co/especiales/lideres-sociales-en-colombia/se-habla-mucho-de-ellos-pero-que-es-y-que-hace-un-lider-social-3123581");
             hyperlink.setOnAction(new EventHandler<ActionEvent>() {
@@ -285,12 +328,17 @@ public class Main extends Application {
                     }
                 }
             });
-            File file =new File("");
-            Image image = new Image(file.toURI().toString());
-            ImageView imageView = new ImageView(image);
-            BorderPane layout2 = new BorderPane();
-            layout2.getChildren().add(imageView);
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.CENTER_LEFT);
+            label.setFont(new Font(20));
 
+
+            Image image = new Image("/image/sociales.jpg");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
 
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
@@ -306,7 +354,13 @@ public class Main extends Application {
             //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
-            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices = new PersonaServices();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
             try {
                 this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "2021-01-07", "Nechi", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
                 this.personaServices.insert(new Persona("Alfredo", "Garcia", "2021-01-10", "Ituango", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
@@ -346,6 +400,17 @@ public class Main extends Application {
                     }
                 }
             });
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.CENTER_LEFT);
+            label.setFont(new Font(20));
+
+            Image image = new Image("/image/ambientalista.png");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
@@ -361,7 +426,13 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices = new PersonaServices();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
             try {
                 this.personaServices.insert(new Persona("Fredman", "Herazo Padilla", "2021-01-15", "La Apartada", "Córdoba", "Afrodescendiente"));
                 this.personaServices.insert(new Persona("José", "Riascos", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente"));
@@ -376,7 +447,9 @@ public class Main extends Application {
             Label label = new Label("Funcionalidad lider Afrodescendientes:\n" +
                     "\n"+
                     " Defienden territorios, los derechos humanos, \n" +
-                    "se centran en que la educacion sea buena y que la exista una proteccion hacia las diferentes comunidades." );
+                    "se centran en que la educacion sea buena y que \n" +
+                    "la exista una proteccion hacia las diferentes\n" +
+                    " comunidades." );
             try {
                 url = new URI("https://n9.cl/nr3y");
             } catch (URISyntaxException ex) {}
@@ -396,6 +469,17 @@ public class Main extends Application {
                     }
                 }
             });
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.TOP_CENTER);
+            label.setFont(new Font(20));
+
+            Image image = new Image("/image/colombia3.jpg");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
@@ -412,8 +496,14 @@ public class Main extends Application {
             //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
+            try {
+                this.personaServices = new PersonaServices();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
 
-            this.personaServices = new PersonaServices();
             try {
                 this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021-01-11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
@@ -428,11 +518,17 @@ public class Main extends Application {
                     " Genera intercambio de roles, conocimiento, experiencias,\n" +
                     "valores, con el fin de hacer a la comunidad reflexionar \n " +
                     "sobre la transformacion de situaciones ambientales. \n" );
+
+            label.setMaxWidth(1000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.CENTER_LEFT);
+            label.setFont(new Font(20));
+
             try {
                 url = new URI("https://n9.cl/q2x1u");
             } catch (URISyntaxException ex) {}
 
-            hyperlink.setText("https://n9.cl/q2x1u ");
+            hyperlink.setText("https://n9.cl/q2x1u");
             hyperlink.setOnAction(new EventHandler<ActionEvent>() {
 
                 @Override
@@ -447,6 +543,18 @@ public class Main extends Application {
                     }
                 }
             });
+
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.CENTER_LEFT);
+            label.setFont(new Font(20));
+
+            Image image = new Image("/image/ambientalista1.png");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
@@ -463,7 +571,13 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices = new PersonaServices();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
             try {
                 this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "2021-01-15","Yondo","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
                 this.personaServices.insert(new Persona("Janeth", "Zapata", "2021-01-21","Dosquebradas","Risaralda","Comunal", LeaderTypeEnum.COMUNAL,true));
@@ -506,6 +620,18 @@ public class Main extends Application {
                     }
                 }
             });
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.CENTER_LEFT);
+            label.setFont(new Font(20));
+
+            Image image = new Image("/image/comunal.jpeg");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
+
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
@@ -521,7 +647,14 @@ public class Main extends Application {
             //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
-            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices = new PersonaServices();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
             try {
                 this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021-05-15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
                 this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021-02-14", "Caceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
@@ -578,6 +711,17 @@ public class Main extends Application {
                     }
                 }
             });
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.CENTER_RIGHT);
+            label.setFont(new Font(20));
+
+            Image image = new Image("/image/colombia1.jpg");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
@@ -594,7 +738,13 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices = new PersonaServices();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
             try {
                 this.personaServices.insert(new Persona("Andres", "Moreno", "2021-04-10","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
@@ -605,10 +755,11 @@ public class Main extends Application {
             Hyperlink hyperlink = new Hyperlink();
             Scene hyp = new Scene(hyperlink,200,200);
 
-            Label label = new Label("Funcionalidad lider LGTBIQ+:\n" +
+            Label label = new Label("Funcionalidad lider LGTBIQ:\n" +
                     "\n"+
-                    " Se empeñan en que la igualdad de género cada vez sea mayor y \n" +
-                    " la discriminacion incremente, de igual forma defienden los derechos humanos.");
+                    " Se empeñan en que la igualdad de genero cada vez sea mayor y \n" +
+                    " la discriminacion incremente, de igual forma defienden \n" +
+                    "los derechos humanos.");
 
             try {
                 url = new URI("http://www.scielo.org.co/pdf/luaz/n34/n34a13.pdf");
@@ -629,6 +780,17 @@ public class Main extends Application {
                     }
                 }
             });
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.BOTTOM_RIGHT);
+            label.setFont(new Font(20));
+
+            Image image = new Image("/image/LGT.png");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
@@ -645,7 +807,13 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices = new PersonaServices();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
             try {
 
                 this.personaServices.insert(new Persona("Gerardo", "Leon", "2021-01-01","Puerto Gaitan","Meta","Sindical", LeaderTypeEnum.SINDICAL,true));
@@ -693,6 +861,17 @@ public class Main extends Application {
                     }
                 }
             });
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.CENTER_LEFT);
+            label.setFont(new Font(20));
+
+            Image image = new Image("/image/sindical1.png");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
@@ -708,7 +887,13 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            this.personaServices = new PersonaServices();
+            try {
+                this.personaServices = new PersonaServices();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ClassNotFoundException classNotFoundException) {
+                classNotFoundException.printStackTrace();
+            }
             try {
                 this.personaServices.insert(new Persona("Ricardo", "Cortes Rozo", "2021-01-02", "Bogota", "Bogotá", "Civico",LeaderTypeEnum.CIVICO,true));
                 this.personaServices.insert(new Persona("Carlos Erlid", "González Cortés", "2021-01-10", "Buga", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
@@ -767,6 +952,17 @@ public class Main extends Application {
                     }
                 }
             });
+            label.setMaxWidth(100000);
+            label.setPadding(new Insets(0,0,20,0));
+            label.setAlignment(Pos.CENTER_LEFT);
+            label.setFont(new Font(20));
+
+            Image image = new Image("/image/sindical.png");
+            ImageView imageView = new ImageView(image);
+            BorderPane layout = new BorderPane();
+            layout.getChildren().add(imageView);
+            reportLayout.getChildren().add(layout);
+
             reportStage.setScene(hyp);
             reportLayout.getChildren().add(hyperlink);
             reportLayout.getChildren().add(label);
@@ -776,6 +972,7 @@ public class Main extends Application {
         });
 
     }
+
 
     private void setUp() {
         setupTable();
