@@ -1,5 +1,4 @@
 package sample.logic.entities;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,34 +7,6 @@ public class Report extends Exportable implements Serializable {
     private String criteria;
     private int count=0;
     private String description;
-
-    public Report(){
-    }
-    public Report(String criteria){
-    }
-
-    public Report(String criteria, int count, String description) {
-        this.criteria = criteria;
-        this.count = count;
-        this.description = description;
-    }
-
-    public String getCriteria() {
-        return criteria;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int incrementCount(){
-        this.count += 1;
-        return count;
-    }
 
     @Override
     public List<String> toListString() {

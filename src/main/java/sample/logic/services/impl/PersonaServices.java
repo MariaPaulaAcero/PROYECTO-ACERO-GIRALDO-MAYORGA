@@ -135,7 +135,7 @@ public class PersonaServices implements IPersonaServices {
     }
 
     public List<Persona> getPersonas() {
-            return personas;
+        return personas;
     }
     public List<Persona> getCampesino() {
         return campesino;
@@ -173,4 +173,3 @@ public class PersonaServices implements IPersonaServices {
         return victims;
     }
 }
-

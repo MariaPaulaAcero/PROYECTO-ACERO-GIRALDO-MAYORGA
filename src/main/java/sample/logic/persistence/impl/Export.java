@@ -6,7 +6,6 @@ import sample.logic.persistence.IExport;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Export implements IExport {

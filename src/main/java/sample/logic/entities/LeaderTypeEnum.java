@@ -10,10 +10,5 @@ public enum LeaderTypeEnum {
     LGTBIQ,
     SINDICAL,
     CIVICO,
-    NO_APLICA
     ;
-
-    public String getCriteria(LeaderTypeEnum leaderTypeEnum) {
-        return String.valueOf(leaderTypeEnum);
-    }
 }

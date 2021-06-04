@@ -1,9 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import sample.PersonaException;
-import sample.gui.Main;
 import sample.logic.entities.Exportable;
 import sample.logic.entities.LeaderTypeEnum;
 import sample.logic.entities.Persona;
@@ -12,14 +10,12 @@ import sample.logic.services.impl.PersonaServices;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class MainTest {
     static PersonaServices personaServices;
     static Persona persona;
-    static Persona personat;
     static Persona persona1;
     static Persona persona2;
     static Persona persona3;

@@ -1,15 +1,10 @@
 package sample.logic.services.impl;
 
 
-import javafx.collections.FXCollections;
 import sample.gui.Main;
-import sample.logic.entities.Persona;
-import sample.logic.entities.LeaderTypeEnum;
-import sample.logic.entities.Report;
 import sample.logic.services.IPersonaServices;
 import sample.logic.services.IReportServices;
 
-import java.util.*;
 
 public class ReportServices implements IReportServices {
 
@@ -18,6 +13,7 @@ public class ReportServices implements IReportServices {
     public ReportServices() {
         personaServices = Main.personaServices;
     }
+
     /*
 
     @Override

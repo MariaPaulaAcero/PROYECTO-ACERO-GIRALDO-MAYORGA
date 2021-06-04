@@ -1,8 +1,8 @@
 package sample.logic.entities;
 
+
 import sample.PersonaException;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +12,6 @@ public class Persona extends Exportable implements Serializable {
     private String name;
     private String lastName;
     private String deathDate;
-    //private LocalDate deathDate;
     private String municipality;
     private String department;
     private String typesOfLeader;
@@ -20,15 +19,12 @@ public class Persona extends Exportable implements Serializable {
 
     private Enum typeOfLeader;
     private boolean isVictim;
-    private boolean isCampesinoVictim;
-
 
 
     public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader, Enum typeOfLeader, boolean isVictim) throws PersonaException {
         this.name = name;
         this.lastName = lastName;
         this.deathDate= deathDate;
-        //this.setDeathDateToString(deathDate);
         this.municipality = municipality;
         this.department = department;
         this.typesOfLeader = typesOfLeader;
@@ -40,7 +36,6 @@ public class Persona extends Exportable implements Serializable {
         this.name = name;
         this.lastName = lastName;
         this.deathDate= deathDate;
-        //this.setDeathDateToString(deathDate);
         this.municipality = municipality;
         this.department = department;
         this.typesOfLeader = typesOfLeader;
@@ -82,11 +77,7 @@ public class Persona extends Exportable implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    /*public void setDeathDateToString(String deathDateInput){
-        this.deathDate = LocalDate.parse(deathDateInput);
-    }
 
-     */
     public void setDeathDate(String deathDate){
         this.deathDate=deathDate;
     }
@@ -120,31 +111,7 @@ public class Persona extends Exportable implements Serializable {
 
     @Override
     public List<String> toListString() {
-        String  vistima = "NO";
-        String  leaderType = String.valueOf(LeaderTypeEnum.CAMPESINO);
-        String  leaderType1 = String.valueOf(LeaderTypeEnum.AMBIENTALISTA);
-        String  leaderType2 = String.valueOf(LeaderTypeEnum.AFRODESCENDIENTES);
 
-        if (isVictim)
-            vistima= "SI";
-        if (leaderType.equals(LeaderTypeEnum.CAMPESINO))
-            leaderType = "Violencia hacia Campesinos";
-        if (leaderType1.equals(LeaderTypeEnum.AMBIENTALISTA))
-            leaderType1= "Violencia hacia Ambientalistas";
-        if (leaderType2.equals(LeaderTypeEnum.AFRODESCENDIENTES))
-            leaderType2= "Violencia hacia Afrodescendientes";
-        if (leaderType.equals(LeaderTypeEnum.SINDICAL))
-            leaderType= "Violencia hacia Sindicales";
-        if (leaderType.equals(LeaderTypeEnum.CIVICO))
-            leaderType= "Violencia hacia Civicos";
-        if (leaderType.equals(LeaderTypeEnum.COMUNAL))
-            leaderType= "Violencia hacia comunales";
-        if (leaderType.equals(LeaderTypeEnum.INDIGENA))
-            leaderType= "Violencia hacia indigenas";
-        if (leaderType.equals(LeaderTypeEnum.LGTBIQ))
-            leaderType= "Violencia hacia LGTBIQ+";
-
-        
         List<String> result = new ArrayList<>();
         result.add(this.name);
         result.add(this.lastName);
