@@ -30,12 +30,16 @@ public class PersonaServices implements IPersonaServices {
     private IPersonaPersistence personaPersistence;
     private static IExport export = new Export();
 
-    public PersonaServices() throws IOException, ClassNotFoundException {
+    public PersonaServices() {
         this.personas = FXCollections.observableArrayList();
         try {
             this.personaPersistence = new PersonaPersistence();
             this.export = new Export();
-            this.personas.addAll(this.personaPersistence.read("lideres.colombia"));
+            try {
+                this.personas.addAll(this.personaPersistence.read("lideres.colombia"));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

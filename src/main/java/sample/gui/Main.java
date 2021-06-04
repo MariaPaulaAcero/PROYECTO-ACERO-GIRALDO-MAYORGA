@@ -49,7 +49,6 @@ public class Main extends Application {
     private TextField municipalityInput;
     private TextField departmentInput;
     private TextField typesOfLeaderInput;
-    private TextField professionInput;
     private TextField isVictimInput;
 
     private Button addPersona;
@@ -168,49 +167,17 @@ public class Main extends Application {
         personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
 
         addPersona.setOnAction(e -> {
-            boolean victim = false;
-            Enum leaderTypeEnum = LeaderTypeEnum.NO_APLICA;
-
-            if (leaderTypeEnum.equals(LeaderTypeEnum.CAMPESINO))
-                victim = true;
-            if (leaderTypeEnum.equals(LeaderTypeEnum.AMBIENTALISTA))
-                victim = true;
-            if (leaderTypeEnum.equals(LeaderTypeEnum.AFRODESCENDIENTES))
-                victim = true;
-            if (leaderTypeEnum.equals(LeaderTypeEnum.SINDICAL))
-                victim = true;
-            if (leaderTypeEnum.equals(LeaderTypeEnum.CIVICO))
-                victim = true;
-            if (leaderTypeEnum.equals(LeaderTypeEnum.COMUNAL))
-                victim = true;
-            if (leaderTypeEnum.equals(LeaderTypeEnum.INDIGENA))
-                victim = true;
-            if (leaderTypeEnum.equals(LeaderTypeEnum.LGTBIQ))
-                victim = true;
-
-           /* this.personaServices = new PersonaServices();
-
-            leaderVictimsToralNumber.setText(String.valueOf(personaServices.getVictims().size()));
-            leaderVictimsCampesinoNumber.setText(String.valueOf(personaServices.getCampesino().size()));
-            leaderVictimsAmbientalistaNumber.setText(String.valueOf(personaServices.getAmbientalista().size()));
-            leaderVictimsAfrodescendientesNumber.setText(String.valueOf(personaServices.getAfrodescendiente().size()));
-            leaderVictimsSindicalNumber.setText(String.valueOf(personaServices.getSindical().size()));
-            leaderVictimsCivicoNumber.setText(String.valueOf(personaServices.getCivico().size()));
-            leaderVictimsComunalNumber.setText(String.valueOf(personaServices.getComunal().size()));
-            leaderVictimsIndigenaNumber.setText(String.valueOf(personaServices.getIndigena().size()));
-            leaderVictimsLGTBIQNumber.setText(String.valueOf(personaServices.getLgtbiq().size()));
-
-            */
-
             try {
                 Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), deathDateInput.getText(), municipalityInput.getText(), departmentInput.getText(),typesOfLeaderInput.getText());
-                this.personaServices.insert(p);
+                //this.personaServices.insert(p);
+                this.personaServices.getAll().add(p);
                 nameInput.clear();
                 lastNameInput.clear();
                 deathDateInput.clear();
                 municipalityInput.clear();
                 departmentInput.clear();
                 typesOfLeaderInput.clear();
+
             } catch (PersonaException personaException) {
                 personaException.printStackTrace();
             }
@@ -349,19 +316,14 @@ public class Main extends Application {
         });
 
 
-        fileMenuItems.get("Campesino").setOnAction(e ->  {
+        fileMenuItems.get("Campesino").setOnAction(e -> {
             Stage reportStage = new Stage();
             //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
             VBox reportLayout = new VBox(10);
-            Scene reportScene = new Scene(reportLayout,200,200);
+            Scene reportScene = new Scene(reportLayout, 200, 200);
+            this.personaServices = new PersonaServices();
             try {
-                this.personaServices = new PersonaServices();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
-            try {
+
                 this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "2021-01-07", "Nechi", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
                 this.personaServices.insert(new Persona("Alfredo", "Garcia", "2021-01-10", "Ituango", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
                 this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "2021-02-02", "Corinto", "Cauca","Campesino", LeaderTypeEnum.CAMPESINO,true));
@@ -426,13 +388,8 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            try {
-                this.personaServices = new PersonaServices();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
+            this.personaServices = new PersonaServices();
+
             try {
                 this.personaServices.insert(new Persona("Fredman", "Herazo Padilla", "2021-01-15", "La Apartada", "Córdoba", "Afrodescendiente"));
                 this.personaServices.insert(new Persona("José", "Riascos", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente"));
@@ -496,14 +453,8 @@ public class Main extends Application {
             //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
-            try {
-                this.personaServices = new PersonaServices();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
 
+            this.personaServices = new PersonaServices();
             try {
                 this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021-01-11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
@@ -571,13 +522,7 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            try {
-                this.personaServices = new PersonaServices();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
+            this.personaServices = new PersonaServices();
             try {
                 this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "2021-01-15","Yondo","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
                 this.personaServices.insert(new Persona("Janeth", "Zapata", "2021-01-21","Dosquebradas","Risaralda","Comunal", LeaderTypeEnum.COMUNAL,true));
@@ -647,14 +592,8 @@ public class Main extends Application {
             //fileMenuItems.get("Campesino").setOnAction(n-> System.out.println(ProfessionEnum.CAMPESINO));
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
-            try {
-                this.personaServices = new PersonaServices();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+            this.personaServices = new PersonaServices();
 
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
             try {
                 this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021-05-15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
                 this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021-02-14", "Caceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
@@ -738,13 +677,7 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            try {
-                this.personaServices = new PersonaServices();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
+            this.personaServices = new PersonaServices();
             try {
                 this.personaServices.insert(new Persona("Andres", "Moreno", "2021-04-10","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
@@ -807,20 +740,12 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
+            this.personaServices = new PersonaServices();
             try {
-                this.personaServices = new PersonaServices();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
-            try {
-
                 this.personaServices.insert(new Persona("Gerardo", "Leon", "2021-01-01","Puerto Gaitan","Meta","Sindical", LeaderTypeEnum.SINDICAL,true));
                 this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "2021-01-01","El Yopal","Casanare","Sindical", LeaderTypeEnum.SINDICAL,true));
                 this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "2021-03-29","Florida","Valle del Cauca","Sindical", LeaderTypeEnum.SINDICAL,true));
                 this.personaServices.insert(new Persona("Beatriz", "Moreno Mosquera", "2021-05-03","Buenaventura","Valle","Sindical", LeaderTypeEnum.SINDICAL,true));
-
 
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
             } catch (Exception exception) {
@@ -887,13 +812,7 @@ public class Main extends Application {
             VBox reportLayout = new VBox(10);
             Scene reportScene = new Scene(reportLayout,200,200);
 
-            try {
-                this.personaServices = new PersonaServices();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
-            }
+            this.personaServices = new PersonaServices();
             try {
                 this.personaServices.insert(new Persona("Ricardo", "Cortes Rozo", "2021-01-02", "Bogota", "Bogotá", "Civico",LeaderTypeEnum.CIVICO,true));
                 this.personaServices.insert(new Persona("Carlos Erlid", "González Cortés", "2021-01-10", "Buga", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
@@ -1126,22 +1045,6 @@ public class Main extends Application {
 
         // SEGUNDO MENU
 
-        Menu fileMenu2 = new Menu("Report");
-        fileMenuItems2 = new HashMap<>();
-        fileMenuItems2.put("Report", new MenuItem("Report"));
-        fileMenu2.getItems().add(fileMenuItems2.get("Report"));
-
-        menuBar2 = new MenuBar();
-        menuBar2.getMenus().add(fileMenu2);
-
-        //TERCER MENU
-        Menu fileMenu3 = new Menu("Full view");
-        fileMenuItems3 = new HashMap<>();
-        fileMenuItems3.put("Full view", new MenuItem("Full view"));
-        fileMenu3.getItems().add(fileMenuItems3.get("Full view"));
-
-        menuBar3 = new MenuBar();
-        menuBar3.getMenus().add(fileMenu3);
 
     }
 
