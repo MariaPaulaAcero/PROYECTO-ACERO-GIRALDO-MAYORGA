@@ -22,8 +22,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class ReportScene {
-    //Vbox
-    private VBox summaryLayout = new VBox();
 
     //VisualProperties
     private Scene scene;
