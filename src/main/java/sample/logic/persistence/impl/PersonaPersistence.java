@@ -1,6 +1,6 @@
 package sample.logic.persistence.impl;
-
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sample.logic.entities.Persona;
 import sample.logic.persistence.IPersonaPersistence;
 
@@ -112,7 +112,7 @@ public class PersonaPersistence implements IPersonaPersistence {
     }
 
     @Override
-    public List<Persona> read(String path) throws IOException, ClassNotFoundException {
+    public ObservableList<Persona> read(String path) throws IOException, ClassNotFoundException {
 
         /*FileInputStream fis = new FileInputStream(path);
         ObjectInputStream in = new ObjectInputStream(fis);
@@ -121,6 +121,11 @@ public class PersonaPersistence implements IPersonaPersistence {
         // Initially setting bool value as false
         boolean status = false;
         List<Persona> result = FXCollections.observableArrayList();
+        try {
+            FXCollections.observableArrayList(importPersonas(f));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Try block to check for exceptions
         try {
@@ -148,7 +153,7 @@ public class PersonaPersistence implements IPersonaPersistence {
                 Persona p = null;
 
                 while (fis.available() != 0) {
-                    p = (Persona) ois.readObject();
+                    p = (Persona)ois.readObject();
                     result.add(p);
                     // Print customer name and account
                     // number
@@ -179,8 +184,10 @@ public class PersonaPersistence implements IPersonaPersistence {
             }
         }
 
-        return result;
+        return (ObservableList<Persona>) result;
     }
+
+
 
     @Override
     public List<String> importPersonas(File file) throws Exception {
@@ -201,12 +208,12 @@ public class PersonaPersistence implements IPersonaPersistence {
         return personas;
     }
 
-    private List<Persona> readPersonasWithColombiaExtension(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private List<Persona> readPersonasWithSabanaExtension(ObjectInputStream in) throws IOException, ClassNotFoundException {
 
         List<Persona> result = FXCollections.observableArrayList();
 
         try {
-            while (in.available() > 0) {
+            while (in.available()>0) {
                 result.add((Persona) in.readObject());
             }
 
@@ -215,6 +222,7 @@ public class PersonaPersistence implements IPersonaPersistence {
         } finally {
             in.close();
         }
+
 
 
         return result;

@@ -1,5 +1,6 @@
 package sample.gui;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,11 +29,15 @@ import sample.logic.entities.LeaderTypeEnum;
 import sample.logic.services.impl.PersonaServices;
 
 import javax.swing.text.Element;
+import javax.swing.text.TabExpander;
+import javax.swing.text.TabableView;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +72,8 @@ public class Main extends Application {
 
     // Logic Properties
     public static PersonaServices personaServices;
+
+    private TabableView tabableView;
 
 
 
@@ -168,8 +175,12 @@ public class Main extends Application {
         addPersona.setOnAction(e -> {
             try {
                 Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), deathDateInput.getText(), municipalityInput.getText(), departmentInput.getText(),typesOfLeaderInput.getText());
-                //this.personaServices.insert(p);
-                this.personaServices.getAll().add(p);
+                personasTable.getItems().addAll(p);
+                this.personaServices.insert(p);
+                FXCollections.observableArrayList(p);
+                
+                //p.getTypeOfLeader().equals(personaServices);
+
                 nameInput.clear();
                 lastNameInput.clear();
                 deathDateInput.clear();

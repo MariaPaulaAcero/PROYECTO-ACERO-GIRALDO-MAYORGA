@@ -1,6 +1,7 @@
 package sample.logic.services.impl;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sample.logic.entities.Exportable;
 import sample.logic.entities.LeaderTypeEnum;
 import sample.logic.entities.Persona;
@@ -34,9 +35,9 @@ public class PersonaServices implements IPersonaServices {
         this.personas = FXCollections.observableArrayList();
         try {
             this.personaPersistence = new PersonaPersistence();
-            this.export = new Export();
+            //this.export = new Export();
             try {
-                this.personas.addAll(this.personaPersistence.read("lideres.colombia"));
+                this.personas = personaPersistence.read("lideres.colombia");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -53,7 +54,7 @@ public class PersonaServices implements IPersonaServices {
     @Override
     public Persona insert(Persona persona) {
         personas.add(persona);
-        getAllVictims(persona);
+
         try {
             personaPersistence.save(persona);
         } catch (IOException ioException) {
@@ -93,9 +94,11 @@ public class PersonaServices implements IPersonaServices {
     }
 
     @Override
-    public List<Persona> importPersonas(File file) throws Exception {
+    public ObservableList<Persona> importPersonas(File file) throws Exception {
         List<Persona> importedPersonas = new ArrayList<>();
         List<String> read = this.personaPersistence.importPersonas(file);
+
+        System.out.println(read.size());
 
         for (String line : read) {
             String[] tokens = line.split(Exportable.CSV.toString());
@@ -104,9 +107,9 @@ public class PersonaServices implements IPersonaServices {
             this.insert(persona);
         }
 
-        return importedPersonas;
 
-        //return null;
+        return (ObservableList<Persona>) importedPersonas;
+
     }
 
     @Override
