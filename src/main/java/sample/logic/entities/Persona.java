@@ -3,6 +3,8 @@ package sample.logic.entities;
 
 import sample.PersonaException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,34 +13,28 @@ public class Persona extends Exportable implements Serializable {
 
     private String name;
     private String lastName;
-    private String deathDate;
+    private LocalDate deathDate;
     private String municipality;
     private String department;
     private String typesOfLeader;
+    private LocalDate actualDate = LocalDate.now();
+    private int Date;
 
 
     private Enum typeOfLeader;
     private boolean isVictim;
 
 
-    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader, Enum typeOfLeader, boolean isVictim) throws PersonaException {
+    public Persona(String name, String lastName, String deathDate, String municipality, String department, String typesOfLeader, Enum typeOfLeader, boolean isVictim, String actualDate) throws PersonaException {
         this.name = name;
         this.lastName = lastName;
-        this.deathDate= deathDate;
+        this.setDeathDateToString(deathDate);
         this.municipality = municipality;
         this.department = department;
         this.typesOfLeader = typesOfLeader;
         this.typeOfLeader = typeOfLeader;
         this.isVictim = isVictim;
 
-    }
-    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader) throws PersonaException {
-        this.name = name;
-        this.lastName = lastName;
-        this.deathDate= deathDate;
-        this.municipality = municipality;
-        this.department = department;
-        this.typesOfLeader = typesOfLeader;
     }
 
     public String getName() {
@@ -47,8 +43,14 @@ public class Persona extends Exportable implements Serializable {
     public String getLastName() {
         return lastName;
     }
-    public String getDeathDate() {
-        return "The Death Date is " + this.deathDate;
+    public void setDeathDateToString(String deathDateInput) {
+        this.deathDate = LocalDate.parse(deathDateInput);
+    }
+    public LocalDate getDeathDate() {
+        return this.deathDate;
+    }
+    public LocalDate getActualDate(){
+        return this.actualDate;
     }
     public String getMunicipality() {
         return municipality;
@@ -69,7 +71,6 @@ public class Persona extends Exportable implements Serializable {
 
 
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -78,8 +79,8 @@ public class Persona extends Exportable implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setDeathDate(String deathDate){
-        this.deathDate=deathDate;
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
     }
 
     public void setMunicipality(String municipality) {
@@ -106,7 +107,7 @@ public class Persona extends Exportable implements Serializable {
     @Override
     public String toString(){
 
-        return String.format("Nombre=%s, Apellido=%s, Fecha de Fallecimiento=%s, Municipio=%s, Departamento=%s, Tipo de Lider=%s", this.name, this.lastName, this.deathDate, this.municipality, this.department, this.typesOfLeader);
+        return String.format("Nombre=%s, Apellido=%s, Fecha de Fallecimiento=%s, Municipio=%s, Departamento=%s, Tipo de Lider=%s, Fecha actual=%s", this.name, this.lastName, this.deathDate, this.municipality, this.department, this.typesOfLeader, this.actualDate);
     }
 
     @Override
@@ -115,15 +116,16 @@ public class Persona extends Exportable implements Serializable {
         List<String> result = new ArrayList<>();
         result.add(this.name);
         result.add(this.lastName);
-        result.add(this.deathDate);
+        result.add(String.valueOf(this.deathDate));
         result.add(this.municipality);
         result.add(this.department);
         result.add(this.typesOfLeader);
+        result.add(String.valueOf(this.actualDate));
         return result;
     }
 
     @Override
     public String getHeader() {
-        return "name,LastName,deathDate, municipality,department, typesOfLeader";
+        return "name,LastName,deathDate, municipality,department, typesOfLeader, actualDate";
     }
 }

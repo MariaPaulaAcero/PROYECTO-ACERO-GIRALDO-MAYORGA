@@ -1,6 +1,5 @@
 package sample.gui;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,15 +28,13 @@ import sample.logic.entities.LeaderTypeEnum;
 import sample.logic.services.impl.PersonaServices;
 
 import javax.swing.text.Element;
-import javax.swing.text.TabExpander;
-import javax.swing.text.TabableView;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collection;
-import java.util.Collections;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +46,10 @@ public class Main extends Application {
     private TableView<Persona> personasTable;
     private TextField nameInput;
     private TextField lastNameInput;
+    //
     private TextField deathDateInput;
+    private TextField actualDateI;
+    //
     private TextField municipalityInput;
     private TextField departmentInput;
     private TextField typesOfLeaderInput;
@@ -73,8 +73,6 @@ public class Main extends Application {
     // Logic Properties
     public static PersonaServices personaServices;
 
-    private TabableView tabableView;
-
 
 
     //CRUD -
@@ -87,103 +85,119 @@ public class Main extends Application {
         primaryStage.setTitle("final project");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        LocalDate start_date = LocalDate.of(2018, 01, 10);
+
+        // End date
+        LocalDate end_date = LocalDate.of(2021, 06, 04);
+
+        // Function Call
+        findDifference(start_date, end_date);
     }
 
+    public static void findDifference(LocalDate deathDate, LocalDate actualDate) {
+
+        Period diff = Period.between(deathDate, actualDate);
+
+        System.out.print("Difference " + "between two dates is: ");
+
+        System.out.printf("%d years, %d months" + " and %d days ", diff.getYears(), diff.getMonths(), diff.getDays());
+    }
     private void behavior(Stage stage) throws IOException, ClassNotFoundException {
         this.personaServices = new PersonaServices();
         try {
-            this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "2021-01-07", "Nechi", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Alfredo", "Garcia", "2021-01-10", "Ituango", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "2021-02-02", "Corinto", "Cauca","Campesino", LeaderTypeEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Albeiro", "Hoyos", "2021-04-05", "Anori", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Wilson", "Lopez", "2021-04-28", "Aguadas", "Caldas","Campesino", LeaderTypeEnum.CAMPESINO,true));
-            this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "2021-05-09", "Aipe", "Huila","Campesino", LeaderTypeEnum.CAMPESINO,true));
+            this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "2021-01-07", "Nechi", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Alfredo", "Garcia", "2021-01-10", "Ituango", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "2021-02-02", "Corinto", "Cauca","Campesino", LeaderTypeEnum.CAMPESINO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Albeiro", "Hoyos", "2021-04-05", "Anori", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Wilson", "Lopez", "2021-04-28", "Aguadas", "Caldas","Campesino", LeaderTypeEnum.CAMPESINO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "2021-05-09", "Aipe", "Huila","Campesino", LeaderTypeEnum.CAMPESINO,true, "2021-06-04"));
 
-            this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "2021-01-15","Yondo","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Janeth", "Zapata", "2021-01-21","Dosquebradas","Risaralda","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Jose Miguel", "Barrientos Uribe", "2021-01-28","Yarumal","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Arcenio", "Quinayas Ruiz", "2021-01-30","San Agustin","Huila","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "2021-01-31","Taraza","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","2021-02-02","Corinto","Cauca","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Ovidio de Jesus", "Salazar","2021-02-02","Herveo","Tolima","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","2021-04-14","La macarena","Meta","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Justiniano", "Torres Garcia","2021-04-19","Bucaramanga","Santander","Comunal", LeaderTypeEnum.COMUNAL,true));
-            this.personaServices.insert(new Persona("Jorge Emilio", "Ramirez Venegas","2021-05-09","Aipe","Huila","Comunal", LeaderTypeEnum.COMUNAL,true));
+            this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "2021-01-15","Yondo","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Janeth", "Zapata", "2021-01-21","Dosquebradas","Risaralda","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Jose Miguel", "Barrientos Uribe", "2021-01-28","Yarumal","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Arcenio", "Quinayas Ruiz", "2021-01-30","San Agustin","Huila","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "2021-01-31","Taraza","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","2021-02-02","Corinto","Cauca","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Ovidio de Jesus", "Salazar","2021-02-02","Herveo","Tolima","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","2021-04-14","La macarena","Meta","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Justiniano", "Torres Garcia","2021-04-19","Bucaramanga","Santander","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Jorge Emilio", "Ramirez Venegas","2021-05-09","Aipe","Huila","Comunal", LeaderTypeEnum.COMUNAL,true, "2021-06-04"));
 
-            this.personaServices.insert(new Persona("Gerardo", "Leon", "2021-01-01","Puerto Gaitan","Meta","Sindical", LeaderTypeEnum.SINDICAL,true));
-            this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "2021-01-01","El Yopal","Casanare","Sindical", LeaderTypeEnum.SINDICAL,true));
-            this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "2021-03-29","Florida","Valle del Cauca","Sindical", LeaderTypeEnum.SINDICAL,true));
-            this.personaServices.insert(new Persona("Beatriz", "Moreno Mosquera", "2021-05-03","Buenaventura","Valle","Sindical", LeaderTypeEnum.SINDICAL,true));
+            this.personaServices.insert(new Persona("Gerardo", "Leon", "2021-01-01","Puerto Gaitan","Meta","Sindical", LeaderTypeEnum.SINDICAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "2021-01-01","El Yopal","Casanare","Sindical", LeaderTypeEnum.SINDICAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "2021-03-29","Florida","Valle del Cauca","Sindical", LeaderTypeEnum.SINDICAL,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Beatriz", "Moreno Mosquera", "2021-05-03","Buenaventura","Valle","Sindical", LeaderTypeEnum.SINDICAL,true, "2021-06-04"));
 
-            this.personaServices.insert(new Persona("Andres", "Moreno", "2021-04-10","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true));
+            this.personaServices.insert(new Persona("Andres", "Moreno", "2021-04-10","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true, "2021-06-04"));
 
-            this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021-01-11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true));
+            this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021-01-11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true, "2021-06-04"));
 
-            this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021-05-15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021-02-14", "Caceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Rafael", "Domico Carupia", "2021-04-06", "Dabeiba", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Alejandro", "Manugama Cheche", "2021-02-17", "Bagado", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Luz Aida", "Conchave Lana", "2021-02-19", "Alto Baudo", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Pedro Nel", "Valencia Evao", "2021-04-18", "Certegui", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Marcos", "Pai", "2021-02-21", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("John Albeiro", "Pai Pascal", "2021-02-24", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Carmen Ofelia", "Cumbalaza", "2021-03-03", "Cumbal", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Miguel", "Garcia Pai", "2021-03-16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Alvaro", "Pascal Garcia", "2021-03-16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Jose", "Santos Lopez", "2021-03-28", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Maria Ofelia", "Garcia", "2021-03-31", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Dionisio", "Pai Pascal", "2021-04-18", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Jaime", "Basilio", "2021-03-01", "San Basilio", "Sucre", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Maria Bernarda", " Juajibioy", "2021-03-17", "Orito", "Putumayo", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Gilberto", "Findicue Achicue", "2021-03-22", "Inza", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Ramiro", "Ascue Yule", "2021-03-28", "Toribio", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Fernando", "Lozada Franco", "2021-04-04", "Caloto", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Sandra Liliana", "Peña", "2021-04-20", "Caldono", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021-03-31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true));
-            this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021-03-31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true));
+            this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021-05-15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021-02-14", "Caceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Rafael", "Domico Carupia", "2021-04-06", "Dabeiba", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Alejandro", "Manugama Cheche", "2021-02-17", "Bagado", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Luz Aida", "Conchave Lana", "2021-02-19", "Alto Baudo", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Pedro Nel", "Valencia Evao", "2021-04-18", "Certegui", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Marcos", "Pai", "2021-02-21", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("John Albeiro", "Pai Pascal", "2021-02-24", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Carmen Ofelia", "Cumbalaza", "2021-03-03", "Cumbal", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Miguel", "Garcia Pai", "2021-03-16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Alvaro", "Pascal Garcia", "2021-03-16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Jose", "Santos Lopez", "2021-03-28", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Maria Ofelia", "Garcia", "2021-03-31", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Dionisio", "Pai Pascal", "2021-04-18", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Jaime", "Basilio", "2021-03-01", "San Basilio", "Sucre", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Maria Bernarda", " Juajibioy", "2021-03-17", "Orito", "Putumayo", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Gilberto", "Findicue Achicue", "2021-03-22", "Inza", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Ramiro", "Ascue Yule", "2021-03-28", "Toribio", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Fernando", "Lozada Franco", "2021-04-04", "Caloto", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Sandra Liliana", "Peña", "2021-04-20", "Caldono", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021-03-31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021-03-31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
 
-            this.personaServices.insert(new Persona("Ricardo", "Cortes Rozo", "2021-01-02", "Bogota", "Bogota", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Carlos Erlid", "González Cortés", "2021-01-10", "Buga", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Fermiliano", "Meneses", "2021-01-15", "Argelia", "Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("William Antonio", "Rodriguez", "2021-01-16", "Cucuta", "Norte de Santander", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Linda", "Díaz Romero", "2021-01-19", "Cáceres", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Jose", "Abadia Parra", "2021-01-20", "Pereira", "Risaralda", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Julian Sneider", "Muñoz", "2021-01-23", "Cali", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Giovanis", "Carranza Castillo", "2021-01-27", "Valledupar", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Yecid Andres", "Bolaño", "2021-02-08", "Barranquilla", "Atlántico", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Jose Ever", "Alvarez", "2021-02-25", "Rio de Oro", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Luis", "Hermides Alvarez", "2021-03-03", "Río de Oro", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Karina Paola", "Cuesta Ortega", "2021-03-25", "Tierralta", "Córdoba", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("German", "Medina Triviño", "2021-03-30", "Florencia", "Caquetá", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Alvaro Farid", "Rodriguez", "2021-04-13", "Algeciras", "Huila", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Luis Octavio", "Gutierrez Montes", "2021-04-14", "Caucasia", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Francisco", "Giacometto Gomez", "2021-04-17", "Santa Marta", "Magdalena", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Yovani", "Laguna", "2021-05-01", "San Miguel", "Putumayo", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Juan David", "García Naranjo", "2021-05-02", "San Luís", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Cecilia", "Valderrama", "2021-05-11", "Chaparral", "Tolima", "Civico",LeaderTypeEnum.CIVICO,true));
-            this.personaServices.insert(new Persona("Armando", "Alvarez", "2021-05-24", "Cali", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
+            this.personaServices.insert(new Persona("Ricardo", "Cortes Rozo", "2021-01-02", "Bogota", "Bogota", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Carlos Erlid", "González Cortés", "2021-01-10", "Buga", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Fermiliano", "Meneses", "2021-01-15", "Argelia", "Cauca", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("William Antonio", "Rodriguez", "2021-01-16", "Cucuta", "Norte de Santander", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Linda", "Díaz Romero", "2021-01-19", "Cáceres", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Jose", "Abadia Parra", "2021-01-20", "Pereira", "Risaralda", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Julian Sneider", "Muñoz", "2021-01-23", "Cali", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Giovanis", "Carranza Castillo", "2021-01-27", "Valledupar", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Yecid Andres", "Bolaño", "2021-02-08", "Barranquilla", "Atlántico", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Jose Ever", "Alvarez", "2021-02-25", "Rio de Oro", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Luis", "Hermides Alvarez", "2021-03-03", "Río de Oro", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Karina Paola", "Cuesta Ortega", "2021-03-25", "Tierralta", "Córdoba", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("German", "Medina Triviño", "2021-03-30", "Florencia", "Caquetá", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Alvaro Farid", "Rodriguez", "2021-04-13", "Algeciras", "Huila", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Luis Octavio", "Gutierrez Montes", "2021-04-14", "Caucasia", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Francisco", "Giacometto Gomez", "2021-04-17", "Santa Marta", "Magdalena", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Yovani", "Laguna", "2021-05-01", "San Miguel", "Putumayo", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Juan David", "García Naranjo", "2021-05-02", "San Luís", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Cecilia", "Valderrama", "2021-05-11", "Chaparral", "Tolima", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Armando", "Alvarez", "2021-05-24", "Cali", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
 
-            this.personaServices.insert(new Persona("Fredman", "Herazo Padilla", "2021-01-15", "La Apartada", "Córdoba", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true));
-            this.personaServices.insert(new Persona("José", "Riascos", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true));
-            this.personaServices.insert(new Persona("Margarito", "Salas", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true));
+            this.personaServices.insert(new Persona("Fredman", "Herazo Padilla", "2021-01-15", "La Apartada", "Córdoba", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("José", "Riascos", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true, "2021-06-04"));
+            this.personaServices.insert(new Persona("Margarito", "Salas", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true, "2021-06-04"));
 
         } catch (PersonaException e) {
             e.printStackTrace();
         }
         personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
 
-        addPersona.setOnAction(e -> {
+
+
+        /*addPersona.setOnAction(e -> {
             try {
                 Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), deathDateInput.getText(), municipalityInput.getText(), departmentInput.getText(),typesOfLeaderInput.getText());
-                personasTable.getItems().addAll(p);
-                this.personaServices.insert(p);
-                FXCollections.observableArrayList(p);
-                
-                //p.getTypeOfLeader().equals(personaServices);
-
+                //this.personaServices.insert(p);
+                this.personaServices.getAll().add(p);
                 nameInput.clear();
                 lastNameInput.clear();
+                //
                 deathDateInput.clear();
+                //
                 municipalityInput.clear();
                 departmentInput.clear();
                 typesOfLeaderInput.clear();
@@ -192,7 +206,7 @@ public class Main extends Application {
                 personaException.printStackTrace();
             }
         });
-
+*/
         deletePersona.setOnAction(e -> {
             this.personaServices.delete(personasTable.getSelectionModel().getSelectedItems());
         });
@@ -202,7 +216,10 @@ public class Main extends Application {
 
             this.nameInput.setText(persona.getName());
             this.lastNameInput.setText(persona.getLastName());
+            //
             this.deathDateInput.setText(persona.getDeathDate().toString());
+            this.actualDateI.setText(persona.getActualDate().toString());
+            //
             this.municipalityInput.setText(persona.getMunicipality());
             this.departmentInput.setText(persona.getDepartment());
             this.typesOfLeaderInput.setText(persona.getTypesOfLeader().toString());
@@ -210,7 +227,7 @@ public class Main extends Application {
 
         personasTable.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
-        updatePersona.setOnAction(e -> {
+        /*updatePersona.setOnAction(e -> {
             try {
                 Persona personaModify = this.personasTable.getSelectionModel().getSelectedItem();
                 Persona newPersona = new Persona(nameInput.getText(),lastNameInput.getText(),deathDateInput.getText(), municipalityInput.getText(), departmentInput.getText(),typesOfLeaderInput.getText());
@@ -228,7 +245,7 @@ public class Main extends Application {
             } catch (PersonaException personaException) {
                 personaException.printStackTrace();
             }
-        });
+        });*/
 
 
         fileMenuItems.get("Export").setOnAction(e -> {
@@ -334,12 +351,12 @@ public class Main extends Application {
             this.personaServices = new PersonaServices();
             try {
 
-                this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "2021-01-07", "Nechi", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
-                this.personaServices.insert(new Persona("Alfredo", "Garcia", "2021-01-10", "Ituango", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
-                this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "2021-02-02", "Corinto", "Cauca","Campesino", LeaderTypeEnum.CAMPESINO,true));
-                this.personaServices.insert(new Persona("Albeiro", "Hoyos", "2021-04-05", "Anori", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true));
-                this.personaServices.insert(new Persona("Wilson", "Lopez", "2021-04-28", "Aguadas", "Caldas","Campesino", LeaderTypeEnum.CAMPESINO,true));
-                this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "2021-05-09", "Aipe", "Huila","Campesino", LeaderTypeEnum.CAMPESINO,true));
+                this.personaServices.insert(new Persona("Edwin", "Antonio Indaburo", "2021-01-07", "Nechi", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Alfredo", "Garcia", "2021-01-10", "Ituango", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio", "2021-02-02", "Corinto", "Cauca","Campesino", LeaderTypeEnum.CAMPESINO,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Albeiro", "Hoyos", "2021-04-05", "Anori", "Antoquia","Campesino", LeaderTypeEnum.CAMPESINO,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Wilson", "Lopez", "2021-04-28", "Aguadas", "Caldas","Campesino", LeaderTypeEnum.CAMPESINO,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Aldinever", "Cruz Guaraca", "2021-05-09", "Aipe", "Huila","Campesino", LeaderTypeEnum.CAMPESINO,true,"2021-06-04"));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
 
             } catch (Exception exception) {
@@ -401,9 +418,9 @@ public class Main extends Application {
             this.personaServices = new PersonaServices();
 
             try {
-                this.personaServices.insert(new Persona("Fredman", "Herazo Padilla", "2021-01-15", "La Apartada", "Córdoba", "Afrodescendiente"));
-                this.personaServices.insert(new Persona("José", "Riascos", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente"));
-                this.personaServices.insert(new Persona("Margarito", "Salas", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente"));
+                this.personaServices.insert(new Persona("Fredman", "Herazo Padilla", "2021-01-15", "La Apartada", "Córdoba", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("José", "Riascos", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Margarito", "Salas", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true,"2021-06-04"));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -466,7 +483,7 @@ public class Main extends Application {
 
             this.personaServices = new PersonaServices();
             try {
-                this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021-01-11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true));
+                this.personaServices.insert(new Persona("Gonzalo ", "Cardona Molina", "2021-01-11", "Tulua", "Valle del Cauca", "Ambientalista",LeaderTypeEnum.AMBIENTALISTA,true, "2021-06-04"));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -534,16 +551,16 @@ public class Main extends Application {
 
             this.personaServices = new PersonaServices();
             try {
-                this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "2021-01-15","Yondo","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Janeth", "Zapata", "2021-01-21","Dosquebradas","Risaralda","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Jose Miguel", "Barrientos Uribe", "2021-01-28","Yarumal","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Arcenio", "Quinayas Ruiz", "2021-01-30","San Agustin","Huila","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "2021-01-31","Taraza","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","2021-02-02","Corinto","Cauca","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Ovidio de Jesus", "Salazar","2021-02-02","Herveo","Tolima","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","2021-04-14","La macarena","Meta","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Justiniano", "Torres Garcia","2021-04-19","Bucaramanga","Santander","Comunal", LeaderTypeEnum.COMUNAL,true));
-                this.personaServices.insert(new Persona("Jorge Emilio", "Ramirez Venegas","2021-05-09","Aipe","Huila","Comunal", LeaderTypeEnum.COMUNAL,true));
+                this.personaServices.insert(new Persona("Robinson", "Quino Bonilla", "2021-01-15","Yondo","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Janeth", "Zapata", "2021-01-21","Dosquebradas","Risaralda","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Jose Miguel", "Barrientos Uribe", "2021-01-28","Yarumal","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Arcenio", "Quinayas Ruiz", "2021-01-30","San Agustin","Huila","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Remberto", "Arrieta Bohorquez", "2021-01-31","Taraza","Antoquia","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Yordan Eduardo", "Guetio","2021-02-02","Corinto","Cauca","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Ovidio de Jesus", "Salazar","2021-02-02","Herveo","Tolima","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Juan Carlos", "Aguirre","2021-04-14","La macarena","Meta","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Justiniano", "Torres Garcia","2021-04-19","Bucaramanga","Santander","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
+                this.personaServices.insert(new Persona("Jorge Emilio", "Ramirez Venegas","2021-05-09","Aipe","Huila","Comunal", LeaderTypeEnum.COMUNAL,true,"2021-06-04"));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -605,28 +622,29 @@ public class Main extends Application {
             this.personaServices = new PersonaServices();
 
             try {
-                this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021-05-15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021-02-14", "Caceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Rafael", "Domico Carupia", "2021-04-06", "Dabeiba", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Alejandro", "Manugama Cheche", "2021-02-17", "Bagado", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Luz Aida", "Conchave Lana", "2021-02-19", "Alto Baudo", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Pedro Nel", "Valencia Evao", "2021-04-18", "Certegui", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Marcos", "Pai", "2021-02-21", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("John Albeiro", "Pai Pascal", "2021-02-24", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Carmen Ofelia", "Cumbalaza", "2021-03-03", "Cumbal", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Miguel", "Garcia Pai", "2021-03-16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Alvaro", "Pascal Garcia", "2021-03-16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Jose", "Santos Lopez", "2021-03-28", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Maria Ofelia", "Garcia", "2021-03-31", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Dionisio", "Pai Pascal", "2021-04-18", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Jaime", "Basilio", "2021-03-01", "San Basilio", "Sucre", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Maria Bernarda", " Juajibioy", "2021-03-17", "Orito", "Putumayo", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Gilberto", "Findicue Achicue", "2021-03-22", "Inza", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Ramiro", "Ascue Yule", "2021-03-28", "Toribio", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Fernando", "Lozada Franco", "2021-04-04", "Caloto", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Sandra Liliana", "Peña", "2021-04-20", "Caldono", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021-03-31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true));
-                this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021-03-31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true));
+                this.personaServices.insert(new Persona("Geovanny", "Cabezas Cruz", "2021-05-15", "Jamundí", "Valle del Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Orlando", "Manuel Chima", "2021-02-14", "Caceres", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Rafael", "Domico Carupia", "2021-04-06", "Dabeiba", "Antioquia", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Alejandro", "Manugama Cheche", "2021-02-17", "Bagado", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Luz Aida", "Conchave Lana", "2021-02-19", "Alto Baudo", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Pedro Nel", "Valencia Evao", "2021-04-18", "Certegui", "Choco", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Marcos", "Pai", "2021-02-21", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("John Albeiro", "Pai Pascal", "2021-02-24", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Carmen Ofelia", "Cumbalaza", "2021-03-03", "Cumbal", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Miguel", "Garcia Pai", "2021-03-16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Alvaro", "Pascal Garcia", "2021-03-16", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Jose", "Santos Lopez", "2021-03-28", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Maria Ofelia", "Garcia", "2021-03-31", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Dionisio", "Pai Pascal", "2021-04-18", "Tumaco", "Nariño", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Jaime", "Basilio", "2021-03-01", "San Basilio", "Sucre", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Maria Bernarda", " Juajibioy", "2021-03-17", "Orito", "Putumayo", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Gilberto", "Findicue Achicue", "2021-03-22", "Inza", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Ramiro", "Ascue Yule", "2021-03-28", "Toribio", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Fernando", "Lozada Franco", "2021-04-04", "Caloto", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Sandra Liliana", "Peña", "2021-04-20", "Caldono", "Cauca", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021-03-31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Aura Esther", "Garcia Peñalver", "2021-03-31", "Uribia", "La Guajira", "Indigena",LeaderTypeEnum.INDIGENA,true, "2021-06-04"));
+
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
 
             } catch (Exception exception) {
@@ -689,7 +707,7 @@ public class Main extends Application {
 
             this.personaServices = new PersonaServices();
             try {
-                this.personaServices.insert(new Persona("Andres", "Moreno", "2021-04-10","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true));
+                this.personaServices.insert(new Persona("Andres", "Moreno", "2021-04-10","Mosquera","Cauca","LGTBIQ", LeaderTypeEnum.LGTBIQ,true, "2021,06,04"));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -752,10 +770,10 @@ public class Main extends Application {
 
             this.personaServices = new PersonaServices();
             try {
-                this.personaServices.insert(new Persona("Gerardo", "Leon", "2021-01-01","Puerto Gaitan","Meta","Sindical", LeaderTypeEnum.SINDICAL,true));
-                this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "2021-01-01","El Yopal","Casanare","Sindical", LeaderTypeEnum.SINDICAL,true));
-                this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "2021-03-29","Florida","Valle del Cauca","Sindical", LeaderTypeEnum.SINDICAL,true));
-                this.personaServices.insert(new Persona("Beatriz", "Moreno Mosquera", "2021-05-03","Buenaventura","Valle","Sindical", LeaderTypeEnum.SINDICAL,true));
+                this.personaServices.insert(new Persona("Gerardo", "Leon", "2021-01-01","Puerto Gaitan","Meta","Sindical", LeaderTypeEnum.SINDICAL,true, "2021,06,04"));
+                this.personaServices.insert(new Persona("Diego", "Betancourt Higuera", "2021-01-01","El Yopal","Casanare","Sindical", LeaderTypeEnum.SINDICAL,true, "2021,06,04"));
+                this.personaServices.insert(new Persona("Carlos Alberto", "Vidal", "2021-03-29","Florida","Valle del Cauca","Sindical", LeaderTypeEnum.SINDICAL,true, "2021,06,04"));
+                this.personaServices.insert(new Persona("Beatriz", "Moreno Mosquera", "2021-05-03","Buenaventura","Valle","Sindical", LeaderTypeEnum.SINDICAL,true, "2021,06,04"));
 
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
             } catch (Exception exception) {
@@ -824,26 +842,26 @@ public class Main extends Application {
 
             this.personaServices = new PersonaServices();
             try {
-                this.personaServices.insert(new Persona("Ricardo", "Cortes Rozo", "2021-01-02", "Bogota", "Bogotá", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Carlos Erlid", "González Cortés", "2021-01-10", "Buga", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Fermiliano", "Meneses", "2021-01-15", "Argelia", "Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("William Antonio", "Rodriguez", "2021-01-16", "Cucuta", "Norte de Santander", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Linda", "Díaz Romero", "2021-01-19", "Cáceres", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Jose", "Abadia Parra", "2021-01-20", "Pereira", "Risaralda", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Julian Sneider", "Muñoz", "2021-01-23", "Cali", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Giovanis", "Carranza Castillo", "2021-01-27", "Valledupar", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Yecid Andres", "Bolaño", "2021-02-08", "Barranquilla", "Atlántico", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Jose Ever", "Alvarez", "2021-02-25", "Rio de Oro", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Luis", "Hermides Alvarez", "2021-03-03", "Río de Oro", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Karina Paola", "Cuesta Ortega", "2021-03-25", "Tierralta", "Córdoba", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("German", "Medina Triviño", "2021-03-30", "Florencia", "Caquetá", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Alvaro Farid", "Rodriguez", "2021-04-13", "Algeciras", "Huila", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Luis Octavio", "Gutierrez Montes", "2021-04-14", "Caucasia", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Francisco", "Giacometto Gomez", "2021-04-17", "Santa Marta", "Magdalena", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Yovani", "Laguna", "2021-05-01", "San Miguel", "Putumayo", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Juan David", "García Naranjo", "2021-05-02", "San Luís", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Cecilia", "Valderrama", "2021-05-11", "Chaparral", "Tolima", "Civico",LeaderTypeEnum.CIVICO,true));
-                this.personaServices.insert(new Persona("Armando", "Alvarez", "2021-05-24", "Cali", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true));
+                this.personaServices.insert(new Persona("Ricardo", "Cortes Rozo", "2021-01-02", "Bogota", "Bogota", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Carlos Erlid", "González Cortés", "2021-01-10", "Buga", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Fermiliano", "Meneses", "2021-01-15", "Argelia", "Cauca", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("William Antonio", "Rodriguez", "2021-01-16", "Cucuta", "Norte de Santander", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Linda", "Díaz Romero", "2021-01-19", "Cáceres", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Jose", "Abadia Parra", "2021-01-20", "Pereira", "Risaralda", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Julian Sneider", "Muñoz", "2021-01-23", "Cali", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Giovanis", "Carranza Castillo", "2021-01-27", "Valledupar", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Yecid Andres", "Bolaño", "2021-02-08", "Barranquilla", "Atlántico", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Jose Ever", "Alvarez", "2021-02-25", "Rio de Oro", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Luis", "Hermides Alvarez", "2021-03-03", "Río de Oro", "Cesar", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Karina Paola", "Cuesta Ortega", "2021-03-25", "Tierralta", "Córdoba", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("German", "Medina Triviño", "2021-03-30", "Florencia", "Caquetá", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Alvaro Farid", "Rodriguez", "2021-04-13", "Algeciras", "Huila", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Luis Octavio", "Gutierrez Montes", "2021-04-14", "Caucasia", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Francisco", "Giacometto Gomez", "2021-04-17", "Santa Marta", "Magdalena", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Yovani", "Laguna", "2021-05-01", "San Miguel", "Putumayo", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Juan David", "García Naranjo", "2021-05-02", "San Luís", "Antioquia", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Cecilia", "Valderrama", "2021-05-11", "Chaparral", "Tolima", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
+                this.personaServices.insert(new Persona("Armando", "Alvarez", "2021-05-24", "Cali", "Valle del Cauca", "Civico",LeaderTypeEnum.CIVICO,true, "2021-06-04"));
                 personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -1055,10 +1073,14 @@ public class Main extends Application {
 
         // SEGUNDO MENU
 
-
     }
+
 
     public static void main(String[] args) {
         launch(args);
     }
+
+
+
+
 }
