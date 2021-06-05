@@ -1,6 +1,5 @@
 package sample.gui;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,21 +22,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import sample.DateException;
 import sample.PersonaException;
 import sample.logic.entities.Persona;
 import sample.logic.entities.LeaderTypeEnum;
 import sample.logic.services.impl.PersonaServices;
 
 import javax.swing.text.Element;
-import javax.swing.text.TabExpander;
-import javax.swing.text.TabableView;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,8 +68,6 @@ public class Main extends Application {
 
     // Logic Properties
     public static PersonaServices personaServices;
-
-    private TabableView tabableView;
 
 
 
@@ -167,7 +161,7 @@ public class Main extends Application {
             this.personaServices.insert(new Persona("José", "Riascos", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true));
             this.personaServices.insert(new Persona("Margarito", "Salas", "2021-04-08", "Nuquí", "Chocó", "Afrodescendiente",LeaderTypeEnum.AFRODESCENDIENTES,true));
 
-        } catch (PersonaException e) {
+        } catch (PersonaException | DateException e) {
             e.printStackTrace();
         }
         personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
@@ -175,12 +169,8 @@ public class Main extends Application {
         addPersona.setOnAction(e -> {
             try {
                 Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), deathDateInput.getText(), municipalityInput.getText(), departmentInput.getText(),typesOfLeaderInput.getText());
-                personasTable.getItems().addAll(p);
-                this.personaServices.insert(p);
-                FXCollections.observableArrayList(p);
-                
-                //p.getTypeOfLeader().equals(personaServices);
-
+                //this.personaServices.insert(p);
+                this.personaServices.getAll().add(p);
                 nameInput.clear();
                 lastNameInput.clear();
                 deathDateInput.clear();
@@ -188,7 +178,7 @@ public class Main extends Application {
                 departmentInput.clear();
                 typesOfLeaderInput.clear();
 
-            } catch (PersonaException personaException) {
+            } catch (PersonaException | DateException personaException) {
                 personaException.printStackTrace();
             }
         });
@@ -225,7 +215,7 @@ public class Main extends Application {
                 departmentInput.clear();
                 typesOfLeaderInput.clear();
 
-            } catch (PersonaException personaException) {
+            } catch (PersonaException | DateException personaException) {
                 personaException.printStackTrace();
             }
         });

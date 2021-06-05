@@ -1,8 +1,10 @@
 package sample.logic.entities;
 
 
+import sample.DateException;
 import sample.PersonaException;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,20 +13,21 @@ public class Persona extends Exportable implements Serializable {
 
     private String name;
     private String lastName;
-    private String deathDate;
+    private LocalDate deathDate;
     private String municipality;
     private String department;
     private String typesOfLeader;
+    private final LocalDate primeraFechaAsesinato = LocalDate.parse("2002-01-01");
 
 
     private Enum typeOfLeader;
     private boolean isVictim;
 
 
-    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader, Enum typeOfLeader, boolean isVictim) throws PersonaException {
+    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader, Enum typeOfLeader, boolean isVictim) throws PersonaException, DateException {
         this.name = name;
         this.lastName = lastName;
-        this.deathDate= deathDate;
+        this.setDeathDateToString(deathDate);
         this.municipality = municipality;
         this.department = department;
         this.typesOfLeader = typesOfLeader;
@@ -32,10 +35,10 @@ public class Persona extends Exportable implements Serializable {
         this.isVictim = isVictim;
 
     }
-    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader) throws PersonaException {
+    public Persona(String name, String lastName,String deathDate,String municipality,String department,String typesOfLeader) throws PersonaException, DateException {
         this.name = name;
         this.lastName = lastName;
-        this.deathDate= deathDate;
+        this.setDeathDateToString(deathDate);
         this.municipality = municipality;
         this.department = department;
         this.typesOfLeader = typesOfLeader;
@@ -47,8 +50,8 @@ public class Persona extends Exportable implements Serializable {
     public String getLastName() {
         return lastName;
     }
-    public String getDeathDate() {
-        return "The Death Date is " + this.deathDate;
+    public LocalDate getDeathDate() {
+        return this.deathDate;
     }
     public String getMunicipality() {
         return municipality;
@@ -78,8 +81,16 @@ public class Persona extends Exportable implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setDeathDate(String deathDate){
-        this.deathDate=deathDate;
+    public void setDeathDateToString(String deathDateInput) throws DateException {
+        if(LocalDate.parse(deathDateInput).isAfter(LocalDate.now())) {
+            throw new DateException(DateException.BAD_DEATHDATE_AFTER);
+        }
+        if (LocalDate.parse(deathDateInput).isBefore(primeraFechaAsesinato)) {
+            throw new DateException(DateException.BAD_DEATHDATE_BEFORE);
+        }else{
+            this.deathDate = LocalDate.parse(deathDateInput);
+        }
+
     }
 
     public void setMunicipality(String municipality) {
@@ -88,6 +99,10 @@ public class Persona extends Exportable implements Serializable {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public void setDeathDate(LocalDate deathDate) {
+        this.deathDate = deathDate;
     }
 
     public void setTypesOfLeader(String typesOfLeader) {
@@ -115,7 +130,7 @@ public class Persona extends Exportable implements Serializable {
         List<String> result = new ArrayList<>();
         result.add(this.name);
         result.add(this.lastName);
-        result.add(this.deathDate);
+        //result.add(this.deathDate);
         result.add(this.municipality);
         result.add(this.department);
         result.add(this.typesOfLeader);
